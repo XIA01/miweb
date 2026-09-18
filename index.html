@@ -261,30 +261,127 @@
 
     </div>
 
-    <!-- PROYECTO 3: DIARIO CLÍNICO IA -->
-    <div class="mt-8 rounded-3xl p-6 sm:p-8 bg-gradient-to-r from-purple-900/20 via-indigo-900/20 to-blue-900/20 border border-indigo-500/30 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
-      <div class="flex items-center gap-5">
-        <div class="w-14 h-14 rounded-2xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-3xl shrink-0">
-          🩺
-        </div>
-        <div>
-          <div class="inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-400 uppercase tracking-wider mb-1">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            En Producción • Nuevo
+    <!-- PROYECTO 3: DIARIO CLÍNICO IA (CASO DESTACADO) -->
+    <div class="mt-12 glass-card rounded-3xl p-6 sm:p-10 border border-purple-500/30 bg-gradient-to-br from-purple-950/30 via-slate-900/60 to-indigo-950/30 shadow-2xl relative overflow-hidden group">
+      <!-- Glow ambiental de la tarjeta -->
+      <div class="absolute -top-24 -right-24 w-72 h-72 bg-purple-600/15 rounded-full blur-3xl pointer-events-none group-hover:bg-purple-600/25 transition-all duration-500"></div>
+
+      <!-- Cabecera del proyecto -->
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8 border-b border-white/5 pb-6 relative z-10">
+        <div class="flex items-start gap-4">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-3xl shadow-lg shadow-purple-600/30 shrink-0">
+            🩺
           </div>
-          <h4 class="text-xl font-heading font-bold text-white">Diario Clínico IA (Historial Familiar Inteligente)</h4>
-          <p class="text-xs text-gray-300 mt-1 max-w-xl leading-relaxed">Seguimiento por especialidades médicas, fotos de órdenes, recordatorios de turnos y asistente inteligente para entender estudios.</p>
+          <div>
+            <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+              <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-wider flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                En Producción
+              </span>
+              <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-purple-500/15 text-purple-300 border border-purple-500/30">
+                ✨ Visión Artificial & Asistente IA
+              </span>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-heading font-extrabold text-white group-hover:text-purple-300 transition">
+              Diario Clínico IA
+            </h3>
+            <p class="text-xs sm:text-sm font-medium text-purple-300/90 mt-0.5">
+              Historial Médico Familiar, Escáner de Visión por Computadora & Asistente Clínico Inteligente
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 shrink-0">
+          <a href="https://diario-clinico.netlify.app" target="_blank" class="py-3 px-5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-heading font-bold text-xs shadow-lg shadow-purple-600/25 transition flex items-center gap-2 transform active:scale-95">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <span>Probar App en Vivo</span>
+          </a>
+          <a href="https://github.com/XIA01/diarioclinico" target="_blank" class="py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white text-xs font-semibold flex items-center gap-2 transition" title="Ver código fuente">
+            <i class="fa-brands fa-github text-sm"></i>
+            <span>GitHub</span>
+          </a>
         </div>
       </div>
-      <div class="flex items-center gap-3 shrink-0 w-full md:w-auto">
-        <a href="https://diario-clinico.netlify.app" target="_blank" class="flex-1 md:flex-none py-3 px-5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-heading font-bold text-xs shadow-lg shadow-purple-600/25 transition flex items-center justify-center gap-2">
-          <i class="fa-solid fa-arrow-up-right-from-square"></i>
-          <span>Probar App</span>
-        </a>
-        <a href="https://github.com/XIA01/diarioclinico" target="_blank" class="py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white text-xs font-semibold flex items-center gap-2 transition" title="Ver código fuente">
-          <i class="fa-brands fa-github text-sm"></i>
-          <span>GitHub</span>
-        </a>
+
+      <!-- Descripción principal -->
+      <p class="text-sm text-gray-300 leading-relaxed mb-8 relative z-10 max-w-4xl">
+        Plataforma web médica familiar diseñada para terminar con las órdenes perdidas y el olvido de indicaciones médicas. Integra un <strong>motor propio de visión por computadora</strong> que digitaliza y endereza recetas arrugadas o tomadas de costado en el celular, junto a un <strong>asistente inteligente con IA</strong> que traduce diagnósticos a lenguaje simple y ayuda a preparar las preguntas para la próxima consulta médica.
+      </p>
+
+      <!-- Grilla de innovaciones técnicas destacadas -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 relative z-10">
+        
+        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-purple-500/30 transition">
+          <div class="w-8 h-8 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-sm font-bold">
+            📐
+          </div>
+          <h4 class="text-sm font-heading font-bold text-white">Homografía Proyectiva 2D (Perspective Warp)</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Algoritmo matemático de Paul Heckbert con interpolación bilineal pixel a pixel en JavaScript puro. Endereza fotos tomadas en ángulo oblicuo a 90°, recorta la mesa de fondo y blanquea el papel en menos de 35 ms sin librerías pesadas.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-purple-500/30 transition">
+          <div class="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-sm font-bold">
+            🔍
+          </div>
+          <h4 class="text-sm font-heading font-bold text-white">Malla Táctil con Lupa de Precisión</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            4 anclajes magnéticos arrastrables con el pulgar. Incluye una lupa circular flotante con zoom 2.5x que aparece sobre el dedo para calzar las esquinas de la receta con precisión milimétrica sin tapar la visión.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-purple-500/30 transition">
+          <div class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-bold">
+            📸
+          </div>
+          <h4 class="text-sm font-heading font-bold text-white">Cámara Directa & Multi-Página</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Disparo directo con la cámara trasera (<code class="text-purple-300 font-mono text-[11px]">capture="environment"</code>) o selección de galería. Soporta hasta 5 páginas por consulta para digitalizar frente, dorso y estudios complementarios.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-purple-500/30 transition">
+          <div class="w-8 h-8 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center text-sm font-bold">
+            ✨
+          </div>
+          <h4 class="text-sm font-heading font-bold text-white">Asistente IA (Gemini) con Persistencia</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Explica qué significa cada estudio médico, formula preguntas sugeridas para el doctor y guarda permanentemente el resultado en caché local para consultarlo al instante sin gastar cuota.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-purple-500/30 transition">
+          <div class="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-sm font-bold">
+            🛡️
+          </div>
+          <h4 class="text-sm font-heading font-bold text-white">Resiliencia Móvil & Auto-Borrador</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Sincronización de borrador en tiempo real en segundo plano. Si el sistema operativo del teléfono cierra la pestaña al cambiar a la cámara o WhatsApp, al volver todo el formulario se restaura intacto.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-purple-500/30 transition">
+          <div class="w-8 h-8 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-sm font-bold">
+            ⚡
+          </div>
+          <h4 class="text-sm font-heading font-bold text-white">Zero-Dependencies & Ultra Ligero</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Sin descargar paquetes pesados de 10 MB de WebAssembly en conexiones móviles. Todo el procesamiento de imagen se realiza de forma nativa en la GPU/CPU del navegador en tiempo récord.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Badges de tecnologías utilizadas -->
+      <div class="flex flex-wrap gap-2 pt-4 border-t border-white/5 relative z-10">
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">JavaScript ES6+ (Vanilla)</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-purple-300 border border-purple-500/20">Computer Vision (Homografía 2D)</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-purple-300 border border-purple-500/20">Perspective Warp & Bilinear Filter</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">HTML5 Canvas & Touch API</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-pink-300 border border-pink-500/20">Google Gemini AI</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">PWA Mobile-First</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">Tailwind CSS</span>
       </div>
     </div>
   </section>
@@ -299,7 +396,7 @@
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       
       <div class="glass-card rounded-2xl p-6 space-y-4">
         <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-xl border border-indigo-500/20">
@@ -318,6 +415,16 @@
         <h3 class="text-xl font-heading font-bold text-white">Sistemas en la Nube</h3>
         <p class="text-xs text-gray-400 leading-relaxed">
           Bases de datos sincronizadas en tiempo real entre múltiples celulares o computadoras. Ideales para control de stock, gestión interna, pedidos o seguimiento de clientes.
+        </p>
+      </div>
+
+      <div class="glass-card rounded-2xl p-6 space-y-4">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/20">
+          <i class="fa-solid fa-camera-rotate"></i>
+        </div>
+        <h3 class="text-xl font-heading font-bold text-white">Visión Artificial & IA</h3>
+        <p class="text-xs text-gray-400 leading-relaxed">
+          Procesamiento de imágenes directo en el navegador (escaneo, corrección de perspectiva, filtros) e integración de IA (Gemini/OpenAI) para resolver problemas prácticos.
         </p>
       </div>
 
