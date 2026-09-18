@@ -1,4 +1,4 @@
-﻿# ⚡ Pedro Soria — Software a Medida & Soluciones Digitales
+# ⚡ Pedro Soria — Software a Medida & Soluciones Digitales
 
 > Portafolio profesional personal. Desarrollo de aplicaciones móviles, plataformas web y herramientas a medida para profesionales, comercios y familias.
 
@@ -14,5 +14,5 @@
 HTML5, Tailwind CSS, JavaScript ES6+, Flutter, Firebase Firestore, Netlify.
 
 ## 📬 Contacto
-- **Email:** 99xz03@gmail.com
+- **Web:** [soriam.netlify.app](https://soriam.netlify.app)
 - **GitHub:** [github.com/XIA01](https://github.com/XIA01)
