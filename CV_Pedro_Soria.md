@@ -51,13 +51,13 @@ Combino una década de servicio en seguridad pública y pericias forenses digita
 * **Brújula Táctica HUD:** Orientación física mediante DeviceOrientation API (giroscopio y compás magnético).
 * **Datos Abiertos:** Integración del dataset oficial de Conexión MGP (Municipalidad de General Pueyrredon) con mapeo sobre OpenStreetMap nocturno táctico.
 
-### 4. MDP Data Engine — Motor Cívico de Datos Abiertos & GIS (Mar del Plata)
-*Infraestructura de datos cívicos, auditoría automatizada y pipeline geoespacial para la información pública del Municipio de General Pueyrredon.*  
-💻 **Repo:** [github.com/XIA01/mdp-data-engine](https://github.com/XIA01/mdp-data-engine)
+### 4. MDP Data Engine — Motor Cívico de Datos, GIS & Contexto para Agentes IA (Mar del Plata)
+*Infraestructura de datos urbanos, auditoría automatizada y pipeline geoespacial para aplicaciones cívicas y modelos de lenguaje.*  
+💻 **Infraestructura Privada & APIs de Integración**
 * **Auditoría Integral del Catálogo:** Crawler concurrente sobre los 424 conjuntos de datos únicos de `datos.mardelplata.gob.ar` con semáforo de recencia y análisis de formatos (1.866 CSV, 467 PDF).
 * **Pipeline de Normalización Geoespacial UTF-8:** Descarga y corrección automática de codificación `Latin-1 / CP1252` a `UTF-8` estricto en 51 capas vectoriales (GeoJSON).
 * **209.000+ Geometrías e Incidentes Urbanos:** Indexación limpia de 10.081 paradas de colectivo, 1.335 semáforos, cinemómetros/radares viales, redes de infraestructura y establecimientos de salud.
-* **Incidencia en Transparencia Pública:** Elaboración del Informe Técnico de Calidad MGP 2026 y solicitud formal de credenciales para el Web Service GIS municipal (`ws.php`).
+* **Capa de Contexto para Agentes IA:** Diseñado para integrarse vía Model Context Protocol (MCP) y APIs REST para alimentar modelos de IA y aplicaciones móviles.
 
 ### 5. Mi Abuelito — Control de Salud Familiar & Planilla Médica Digital
 *Aplicación móvil y web colaborativa para el seguimiento familiar de signos vitales.*  
