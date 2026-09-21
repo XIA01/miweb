@@ -261,7 +261,132 @@
 
     </div>
 
-    <!-- PROYECTO 3: DIARIO CLÍNICO IA (CASO DESTACADO) -->
+    <!-- PROYECTO 3: VIGÍA WEB (CASO DESTACADO) -->
+    <div class="mt-12 glass-card rounded-3xl p-6 sm:p-10 border border-cyan-500/30 bg-gradient-to-br from-cyan-950/30 via-slate-900/60 to-emerald-950/30 shadow-2xl relative overflow-hidden group">
+      <!-- Glow ambiental de la tarjeta -->
+      <div class="absolute -top-24 -right-24 w-72 h-72 bg-cyan-600/15 rounded-full blur-3xl pointer-events-none group-hover:bg-cyan-600/25 transition-all duration-500"></div>
+
+      <!-- Cabecera del proyecto -->
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8 border-b border-white/5 pb-6 relative z-10">
+        <div class="flex items-start gap-4">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-cyan-600 to-emerald-600 flex items-center justify-center text-3xl shadow-lg shadow-cyan-600/30 shrink-0">
+            📹
+          </div>
+          <div>
+            <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+              <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-wider flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                En Producción
+              </span>
+              <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                🔒 WebRTC P2P · Cloudflare · Multi-usuario
+              </span>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-heading font-extrabold text-white group-hover:text-cyan-300 transition">
+              Vigía Web
+            </h3>
+            <p class="text-xs sm:text-sm font-medium text-cyan-300/90 mt-0.5">
+              Sistema de Videovigilancia P2P — Reutilizá tu celular viejo como cámara de seguridad
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 shrink-0">
+          <a href="https://vigiaweb.vercel.app" target="_blank" class="py-3 px-5 rounded-xl bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 text-white font-heading font-bold text-xs shadow-lg shadow-cyan-600/25 transition flex items-center gap-2 transform active:scale-95">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <span>Probar App en Vivo</span>
+          </a>
+          <a href="https://github.com/XIA01/vigia" target="_blank" class="py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white text-xs font-semibold flex items-center gap-2 transition" title="Ver código fuente">
+            <i class="fa-brands fa-github text-sm"></i>
+            <span>GitHub</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Descripción principal -->
+      <p class="text-sm text-gray-300 leading-relaxed mb-8 relative z-10 max-w-4xl">
+        Plataforma open-source de seguridad hogareña que convierte cualquier celular viejo en una cámara de seguridad en tiempo real. Utiliza <strong>WebRTC P2P</strong> para streaming directo sin pasar por servidores, <strong>Cloudflare Quick Tunnels</strong> gratuitos para exponer cámaras IP detrás de un router, y <strong>Firebase Firestore</strong> como señalización. Soporta múltiples usuarios con cuentas independientes, PIN de vinculación y conector Windows descargable pre-configurado.
+      </p>
+
+      <!-- Grilla de innovaciones técnicas destacadas -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 relative z-10">
+
+        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-cyan-500/30 transition">
+          <div class="w-8 h-8 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-sm font-bold">
+            📡
+          </div>
+          <h4 class="text-sm font-heading font-bold text-white">WebRTC P2P — Sin servidores de video</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Streaming directo de cámara a monitor vía PeerJS. El video nunca pasa por la nube: va peer-to-peer entre los dispositivos con latencia mínima y sin límite de ancho de banda.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-cyan-500/30 transition">
+          <div class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-bold">
+            🌐
+          </div>
+          <h4 class="text-sm font-heading font-bold text-white">Cloudflare Quick Tunnels — RTSP/HTTP gratis</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Conector Python en Windows auto-descarga <code class="text-cyan-300 font-mono text-[11px]">cloudflared.exe</code> y crea un túnel HTTPS sin cuenta ni tarjeta. La URL pública se publica a Firestore automáticamente.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-cyan-500/30 transition">
+          <div class="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-sm font-bold">
+            👥
+          </div>
+          <h4 class="text-sm font-heading font-bold text-white">Multi-usuario con PIN de 6 dígitos</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Cada cuenta genera su red aislada automáticamente. Los invitados se vinculan con un PIN familiar. El conector Windows se descarga pre-configurado con las credenciales del usuario.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-cyan-500/30 transition">
+          <div class="w-8 h-8 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-sm font-bold">
+            🔔
+          </div>
+          <h4 class="text-sm font-heading font-bold text-white">Detección de Movimiento con Alarma</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Análisis frame-by-frame con Canvas API. Cuando se detecta movimiento activa una alarma de audio, resalta la cámara y lanza notificaciones. Umbral ajustable en tiempo real.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-cyan-500/30 transition">
+          <div class="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-sm font-bold">
+            📱
+          </div>
+          <h4 class="text-sm font-heading font-bold text-white">Bento Grid Responsive con Pantalla Completa</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Centro de monitoreo con grilla redimensionable tipo "Bento". Modal cinematográfico propio para pantalla completa táctil con linterna, snapshot, audio y control de cámara IP.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-cyan-500/30 transition">
+          <div class="w-8 h-8 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center text-sm font-bold">
+            🐍
+          </div>
+          <h4 class="text-sm font-heading font-bold text-white">Conector Híbrido BAT/Python + Termux</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Script Windows autoejecutable (<code class="text-cyan-300 font-mono text-[11px]">.bat</code> con Python embebido) y <code class="text-cyan-300 font-mono text-[11px]">puente_termux.py</code> para Android. Sincroniza cámaras IP RTSP en tiempo real con Firestore.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Badges de tecnologías utilizadas -->
+      <div class="flex flex-wrap gap-2 pt-4 border-t border-white/5 relative z-10">
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">JavaScript ES6+ (Vanilla)</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-cyan-300 border border-cyan-500/20">WebRTC / PeerJS</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-cyan-300 border border-cyan-500/20">Cloudflare Quick Tunnels</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">Firebase Firestore</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-emerald-300 border border-emerald-500/20">Python 3 (RTSP/HTTP Server)</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">HTML5 Canvas (Motion Detection)</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">Tailwind CSS</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">PWA Mobile-First</span>
+      </div>
+    </div>
+
+    <!-- PROYECTO 4: DIARIO CLÍNICO IA (CASO DESTACADO) -->
     <div class="mt-12 glass-card rounded-3xl p-6 sm:p-10 border border-purple-500/30 bg-gradient-to-br from-purple-950/30 via-slate-900/60 to-indigo-950/30 shadow-2xl relative overflow-hidden group">
       <!-- Glow ambiental de la tarjeta -->
       <div class="absolute -top-24 -right-24 w-72 h-72 bg-purple-600/15 rounded-full blur-3xl pointer-events-none group-hover:bg-purple-600/25 transition-all duration-500"></div>
