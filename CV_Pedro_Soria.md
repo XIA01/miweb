@@ -37,7 +37,7 @@ Combino una década de servicio en seguridad pública y pericias forenses digita
 
 ### 2. Diario Clínico IA — Digitalizador Médico con Homografía Proyectiva & Asistente IA
 *Plataforma médica familiar para terminar con las órdenes perdidas y el olvido de indicaciones.*  
-🌐 **En Vivo:** [diario-clinico.netlify.app](https://diario-clinico.netlify.app) | 💻 **Repo:** [github.com/XIA01/diarioclinico](https://github.com/XIA01/diarioclinico)
+🌐 **En Vivo:** [diarioclinico.vercel.app](https://diarioclinico.vercel.app) | 💻 **Repo:** [github.com/XIA01/diarioclinico](https://github.com/XIA01/diarioclinico)
 * **Computer Vision en JS Puro (Zero-Dependencies):** Motor matemático de homografía proyectiva 2D (algoritmo de Paul Heckbert con interpolación bilineal pixel a pixel) que endereza fotos de recetas tomadas en ángulo oblicuo a 90°, recorta fondos y blanquea el papel en <35 ms sin WebAssembly pesado.
 * **Malla Táctil con Lupa Flotante 2.5x:** 4 anclajes magnéticos arrastrables con zoom dinámico para ajuste milimétrico sobre el dedo.
 * **Asistente Clínico Inteligente:** Integración con Google Gemini para traducción de diagnósticos a lenguaje simple, preguntas sugeridas para el doctor y persistencia en caché local.

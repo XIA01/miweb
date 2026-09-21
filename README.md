@@ -9,7 +9,7 @@
 ## 🚀 Proyectos en Producción (Software Real en Uso)
 
 - 📹 **[Vigía Web](https://vigiaweb.vercel.app):** Sistema de videovigilancia distribuida WebRTC P2P con túneles Cloudflare y detección de movimiento por Canvas.
-- 🩺 **[Diario Clínico IA](https://diario-clinico.netlify.app):** Digitalizador médico con motor propio de homografía proyectiva 2D y asistente IA con Google Gemini.
+- 🩺 **[Diario Clínico IA](https://diarioclinico.vercel.app):** Digitalizador médico con motor propio de homografía proyectiva 2D y asistente IA con Google Gemini.
 - 📡 **[WiFi MDP](https://wifimdp.vercel.app):** Radar táctico, brújula satelital HUD y PWA offline-first para puntos de WiFi gratuito en Mar del Plata.
 - 👴 **[Mi Abuelito](https://mi-abuelito.netlify.app):** Control de salud familiar y generación de planillas médicas hospitalarias en PDF (Flutter 3).
 - 🌌 **[Lazo Cuántico](https://lazocuantico.netlify.app):** Transferencia efímera y privada con código de 4 dígitos y autodestrucción inmediata.
