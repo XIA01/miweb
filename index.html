@@ -659,6 +659,114 @@
         <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">Tailwind CSS</span>
       </div>
     </div>
+
+    <!-- TARJETA DESTACADA: MDP DATA ENGINE -->
+    <div class="glass-card rounded-3xl p-6 sm:p-10 border border-blue-500/30 bg-gradient-to-br from-blue-950/30 via-slate-900/60 to-indigo-950/30 shadow-2xl relative overflow-hidden group mt-8">
+      <!-- Glow ambiental de la tarjeta -->
+      <div class="absolute -top-24 -right-24 w-72 h-72 bg-blue-600/15 rounded-full blur-3xl pointer-events-none group-hover:bg-blue-600/25 transition-all duration-500"></div>
+
+      <!-- Cabecera del proyecto -->
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8 border-b border-white/5 pb-6 relative z-10">
+        <div class="flex items-start gap-4">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-3xl shadow-lg shadow-blue-500/30 shrink-0">
+            🏛️
+          </div>
+          <div>
+            <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+              <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20 uppercase tracking-wider flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
+                Código Abierto · GitHub
+              </span>
+              <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
+                🗺️ 51 Capas GeoJSON · 209k Geometrías
+              </span>
+              <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                ✨ Pipeline UTF-8 Normalizado
+              </span>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-heading font-extrabold text-white group-hover:text-blue-300 transition">
+              MDP Data Engine — Infraestructura Cívica de Datos & GIS
+            </h3>
+            <p class="text-xs sm:text-sm font-medium text-blue-300/90 mt-0.5">
+              Motor de Ingesta, Normalización Geoespacial y Auditoría Integral del Portal de Datos Abiertos de Mar del Plata
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 shrink-0">
+          <a href="https://github.com/XIA01/mdp-data-engine" target="_blank" class="py-3 px-5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-heading font-bold text-xs shadow-lg shadow-blue-600/25 transition flex items-center gap-2 transform active:scale-95">
+            <i class="fa-brands fa-github text-sm"></i>
+            <span>Ver Repositorio</span>
+          </a>
+          <a href="https://github.com/XIA01/mdp-data-engine/blob/main/INFORME_AUDITORIA_MGP_2026.md" target="_blank" class="py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white text-xs font-semibold flex items-center gap-2 transition" title="Ver informe de auditoría">
+            <i class="fa-solid fa-file-lines text-sm"></i>
+            <span>Informe 2026</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Descripción principal -->
+      <p class="text-sm text-gray-300 leading-relaxed mb-8 relative z-10 max-w-4xl">
+        Infraestructura de software cívico desarrollada para auditar, normalizar y transformar los <strong>424 conjuntos de datos públicos</strong> del Municipio de General Pueyrredon en capas vectoriales listas para producción. Resuelve barreras críticas de acceso público: detección y reparación de archivos municipales codificados en <em>Latin-1/CP1252</em> que producían texto dañado (mojibake), cálculo de Bounding Boxes urbanos y preparación de la base técnica para alimentar módulos de seguridad vial, transporte y salud comunitaria.
+      </p>
+
+      <!-- Grilla de innovaciones técnicas destacadas -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 relative z-10">
+
+        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-blue-500/30 transition">
+          <div class="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-sm font-bold">
+            🔍
+          </div>
+          <h4 class="text-sm font-heading font-bold text-white">Crawler de Auditoría Masiva</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Escaneo concurrente sobre las 45 páginas de datos.mardelplata.gob.ar. Clasificación por recencia (datasets vivos vs congelados) y análisis de 1.866 CSVs y 467 PDFs.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-blue-500/30 transition">
+          <div class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-bold">
+            ⚙️
+          </div>
+          <h4 class="text-sm font-heading font-bold text-white">Pipeline UTF-8 Zero-Mojibake</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Detección heurística de encodings heredados en los servidores municipales y conversión automática a UTF-8 estricto, recuperando nombres de calles, paradas y cinemómetros.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-blue-500/30 transition">
+          <div class="w-8 h-8 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-sm font-bold">
+            📍
+          </div>
+          <h4 class="text-sm font-heading font-bold text-white">209.924 Registros GIS</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Índice geoespacial maestro con 10.081 paradas de colectivos, 1.335 semáforos, 39 radares viales, 71k luminarias, centros de salud y polideportivos barriales.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-blue-500/30 transition">
+          <div class="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-sm font-bold">
+            📬
+          </div>
+          <h4 class="text-sm font-heading font-bold text-white">Incidencia & Solicitud de API</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Planteo formal a opendata@mardelplata.gob.ar aportando el informe técnico de calidad y solicitando el token del Web Service GIS municipal (ws.php).
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Badges de tecnologías utilizadas -->
+      <div class="flex flex-wrap gap-2 pt-4 border-t border-white/5 relative z-10">
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-blue-300 border border-blue-500/20">Python 3.10+</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-blue-300 border border-blue-500/20">GeoJSON & Shapefiles</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">Spatial Bounding Boxes (BBOX)</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">BeautifulSoup4 & Requests</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-indigo-300 border border-indigo-500/20">ETL Pipeline & Normalización</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-emerald-300 border border-emerald-500/20">UTF-8 Transcoding</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">Datos Abiertos MGP</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">Arquitectura $0</span>
+      </div>
+    </div>
   </section>
 
   <!-- SECCIÓN: SERVICIOS / QUÉ HAGO -->
