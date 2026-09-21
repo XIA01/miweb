@@ -74,7 +74,8 @@
       <!-- Enlaces Desktop -->
       <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
         <a href="#proyectos" class="hover:text-white transition">Proyectos</a>
-        <a href="#mardelplata" class="hover:text-cyan-300 transition flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>Servicios Mar del Plata</a>
+        <a href="#mardelplata" class="hover:text-cyan-300 transition flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>Servicios MDP</a>
+        <a href="#developers" class="hover:text-purple-300 transition flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>Developers & IA</a>
         <a href="#servicios" class="hover:text-white transition">Servicios</a>
         <a href="#enfoque" class="hover:text-white transition">Cómo Trabajo</a>
         <a href="#contacto" class="hover:text-white transition">Contacto</a>
@@ -97,6 +98,7 @@
     <div id="mobileMenu" class="hidden md:hidden border-b border-white/10 bg-[#090a10]/95 px-6 py-4 space-y-3 text-sm">
       <a href="#proyectos" class="block py-2 text-gray-300 hover:text-white">Proyectos</a>
       <a href="#mardelplata" class="block py-2 text-cyan-300 hover:text-white">Servicios Mar del Plata (Local)</a>
+      <a href="#developers" class="block py-2 text-purple-300 hover:text-white">Developers & IA (APIs)</a>
       <a href="#servicios" class="block py-2 text-gray-300 hover:text-white">Servicios</a>
       <a href="#enfoque" class="block py-2 text-gray-300 hover:text-white">Cómo Trabajo</a>
       <a href="#contacto" class="block py-2 text-gray-300 hover:text-white">Contacto</a>
@@ -658,112 +660,161 @@
         <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">Datos Abiertos MGP (Conexión MGP)</span>
         <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">Tailwind CSS</span>
       </div>
+
+      <!-- Invitación a Developers -->
+      <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between flex-wrap gap-3 text-xs text-gray-400 relative z-10">
+        <span>¿Sos programador, investigador o estudiante y querés usar los datos?</span>
+        <a href="#developers" class="text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1.5 transition">
+          <span>Ver APIs en la Zona Developers</span>
+          <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN: ZONA DEVELOPERS & AGENTES IA -->
+  <section id="developers" class="max-w-6xl mx-auto px-6 py-20 border-t border-white/5">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-purple-500/10 text-purple-300 border border-purple-500/25 mb-3">
+          <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+          Entorno para Programadores & Agentes IA
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-heading font-extrabold text-white mt-1">Zona Developers & APIs</h2>
+      </div>
+      <p class="text-sm text-gray-400 max-w-md mt-2 md:mt-0">
+        APIs Serverless, capas vectoriales normalizadas y endpoints de contexto geográfico estructurado para alimentar aplicaciones de terceros y modelos de lenguaje (LLMs).
+      </p>
     </div>
 
-    <!-- TARJETA DESTACADA: MDP DATA ENGINE -->
-    <div class="glass-card rounded-3xl p-6 sm:p-10 border border-blue-500/30 bg-gradient-to-br from-blue-950/30 via-slate-900/60 to-indigo-950/30 shadow-2xl relative overflow-hidden group mt-8">
+    <!-- TARJETA DESTACADA: MDP DATA ENGINE API -->
+    <div class="glass-card rounded-3xl p-6 sm:p-10 border border-purple-500/30 bg-gradient-to-br from-purple-950/30 via-slate-900/70 to-indigo-950/30 shadow-2xl relative overflow-hidden group">
       <!-- Glow ambiental de la tarjeta -->
-      <div class="absolute -top-24 -right-24 w-72 h-72 bg-blue-600/15 rounded-full blur-3xl pointer-events-none group-hover:bg-blue-600/25 transition-all duration-500"></div>
+      <div class="absolute -top-24 -right-24 w-72 h-72 bg-purple-600/15 rounded-full blur-3xl pointer-events-none group-hover:bg-purple-600/25 transition-all duration-500"></div>
 
       <!-- Cabecera del proyecto -->
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8 border-b border-white/5 pb-6 relative z-10">
         <div class="flex items-start gap-4">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-3xl shadow-lg shadow-blue-500/30 shrink-0">
-            🏛️
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center text-3xl shadow-lg shadow-purple-500/30 shrink-0">
+            ⚡
           </div>
           <div>
             <div class="flex items-center gap-2 mb-1.5 flex-wrap">
-              <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20 uppercase tracking-wider flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
-                Infraestructura Propia · Mar del Plata
+              <a href="https://mdp-data-engine.vercel.app/api/v1/status" target="_blank" class="px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-wider flex items-center gap-1.5 hover:bg-emerald-500/20 transition" title="Verificar estado en vivo">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                API Online en Vercel
+              </a>
+              <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-purple-500/15 text-purple-300 border border-purple-500/30">
+                🗺️ 51 Capas GIS · 209k Geometrías
               </span>
               <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
-                🗺️ 51 Capas GeoJSON · 209k Geometrías
-              </span>
-              <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-purple-500/10 text-purple-300 border border-purple-500/20">
-                🤖 AI Agents & Developer Ready
+                🤖 AI Agent Ready
               </span>
             </div>
-            <h3 class="text-2xl sm:text-3xl font-heading font-extrabold text-white group-hover:text-blue-300 transition">
-              MDP Data Engine — Capa de Datos Urbanos & APIs para Agentes IA
+            <h3 class="text-2xl sm:text-3xl font-heading font-extrabold text-white group-hover:text-purple-300 transition">
+              MDP Data Engine — API Geoespacial Serverless
             </h3>
-            <p class="text-xs sm:text-sm font-medium text-blue-300/90 mt-0.5">
-              Motor de Ingesta, Normalización Geoespacial y Contexto de Datos Abiertos de Mar del Plata
+            <p class="text-xs sm:text-sm font-medium text-purple-300/90 mt-0.5">
+              Microservicios de Proximidad GPS (Haversine), Normalización UTF-8 y Contexto Territorial de Mar del Plata
             </p>
           </div>
         </div>
 
         <div class="flex items-center gap-3 shrink-0">
-          <a href="#contacto" class="py-3 px-5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-heading font-bold text-xs shadow-lg shadow-blue-600/25 transition flex items-center gap-2 transform active:scale-95">
-            <i class="fa-solid fa-code"></i>
-            <span>Consultar API & Recursos</span>
+          <button onclick="document.getElementById('formApiKeySection').scrollIntoView({behavior: 'smooth'})" class="py-3 px-5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-heading font-bold text-xs shadow-lg shadow-purple-600/25 transition flex items-center gap-2 transform active:scale-95 cursor-pointer">
+            <i class="fa-solid fa-key"></i>
+            <span>Solicitar API Key (100 Pedidos)</span>
+          </button>
+          <a href="https://mdp-data-engine.vercel.app/api/v1/status" target="_blank" class="py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white text-xs font-semibold flex items-center gap-2 transition" title="Ver métricas públicas">
+            <i class="fa-solid fa-signal text-emerald-400"></i>
+            <span>Status Live</span>
           </a>
-          <span class="py-3 px-4 rounded-xl bg-white/5 border border-white/10 text-gray-300 text-xs font-semibold flex items-center gap-2">
-            <i class="fa-solid fa-shield-halved text-blue-400"></i>
-            <span>Motor Privado</span>
-          </span>
         </div>
       </div>
 
       <!-- Descripción principal -->
       <p class="text-sm text-gray-300 leading-relaxed mb-8 relative z-10 max-w-4xl">
-        Infraestructura cívica de datos desarrollada para auditar, normalizar y transformar los <strong>424 conjuntos de datos públicos</strong> del Municipio de General Pueyrredon en una capa estructurada de alto rendimiento. Resuelve barreras críticas de acceso público: detección y reparación de archivos municipales codificados en <em>Latin-1/CP1252</em> que producían texto dañado (mojibake), cálculo de Bounding Boxes urbanos y provisión de contexto geográfico preciso para alimentar aplicaciones móviles, micro-servicios y agentes de inteligencia artificial.
+        API Serverless de \$0 costo computacional y latencia inferior a 40 ms, montada sobre los <strong>424 conjuntos de datos auditados</strong> de Mar del Plata y <strong>209.000 geometrías normalizadas a UTF-8 estricto</strong> (reparando los errores históricos de codificación Latin-1). Ofrece cálculo de distancia esférica por GPS al vuelo y generación de resúmenes estructurados para inyección directa en ventanas de contexto de modelos de lenguaje (Claude, GPT, Gemini).
       </p>
 
-      <!-- Grilla de innovaciones técnicas destacadas -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 relative z-10">
-
-        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-blue-500/30 transition">
-          <div class="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-sm font-bold">
-            🔍
-          </div>
-          <h4 class="text-sm font-heading font-bold text-white">Crawler de Auditoría Masiva</h4>
-          <p class="text-xs text-gray-400 leading-relaxed">
-            Escaneo concurrente sobre las 45 páginas de datos.mardelplata.gob.ar. Clasificación por recencia (datasets vivos vs congelados) y análisis de 1.866 CSVs y 467 PDFs.
-          </p>
+      <!-- Terminal interactiva / Guía de endpoints -->
+      <div class="bg-black/50 border border-white/10 rounded-2xl p-5 mb-8 font-mono text-xs text-gray-300 space-y-3 relative z-10">
+        <div class="flex items-center justify-between text-gray-500 border-b border-white/5 pb-2 text-[11px]">
+          <span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span><span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block"></span><span class="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block"></span> Endpoints Principales (Base: https://mdp-data-engine.vercel.app)</span>
+          <span class="text-purple-400 font-bold">HTTPS · JSON / Plain Text</span>
         </div>
-
-        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-blue-500/30 transition">
-          <div class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-bold">
-            ⚙️
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+          <div class="space-y-1.5">
+            <div class="text-emerald-400 font-bold">GET /api/v1/status <span class="text-[10px] text-gray-500 font-normal">(Público)</span></div>
+            <p class="text-gray-400 text-[11px]">Estado del motor, 51 capas disponibles, métricas de calidad y salud general.</p>
           </div>
-          <h4 class="text-sm font-heading font-bold text-white">Pipeline UTF-8 Zero-Mojibake</h4>
-          <p class="text-xs text-gray-400 leading-relaxed">
-            Detección heurística de encodings heredados en los servidores municipales y conversión automática a UTF-8 estricto, recuperando nombres de calles, paradas y cinemómetros.
-          </p>
-        </div>
 
-        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-blue-500/30 transition">
-          <div class="w-8 h-8 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-sm font-bold">
-            📍
+          <div class="space-y-1.5">
+            <div class="text-cyan-400 font-bold">GET /api/v1/nearest?layer={slug}&lat={lat}&lon={lon}&limit=3</div>
+            <p class="text-gray-400 text-[11px]">Cálculo Haversine al vuelo. Devuelve los N elementos más cercanos con distancia métrica.</p>
           </div>
-          <h4 class="text-sm font-heading font-bold text-white">209.924 Registros GIS</h4>
-          <p class="text-xs text-gray-400 leading-relaxed">
-            Índice geoespacial maestro con 10.081 paradas de colectivos, 1.335 semáforos, 39 radares viales, 71k luminarias, centros de salud y polideportivos barriales.
-          </p>
-        </div>
 
-        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-purple-500/30 transition">
-          <div class="w-8 h-8 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-sm font-bold">
-            🤖
+          <div class="space-y-1.5">
+            <div class="text-indigo-400 font-bold">GET /api/v1/agent?q={termino} o ?lat={lat}&lon={lon}</div>
+            <p class="text-gray-400 text-[11px]">Formato texto Markdown comprimido optimizado para agentes IA sin gastar tokens de más.</p>
           </div>
-          <h4 class="text-sm font-heading font-bold text-white">Contexto para Agentes IA</h4>
-          <p class="text-xs text-gray-400 leading-relaxed">
-            Arquitectura compatible con Model Context Protocol (MCP) y endpoints REST para que modelos LLM consulten coordenadas, servicios y proximidad en Mar del Plata.
-          </p>
-        </div>
 
+          <div class="space-y-1.5">
+            <div class="text-purple-400 font-bold">GET /api/v1/layer?id={slug}</div>
+            <p class="text-gray-400 text-[11px]">Descarga vectorial GeoJSON limpia (paradas, radares, semáforos, farmacias, CAPS).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORMULARIO INTERACTIVO DE SOLICITUD DE API KEY -->
+      <div id="formApiKeySection" class="bg-gradient-to-r from-purple-950/40 via-slate-900/80 to-indigo-950/40 border border-purple-500/30 rounded-2xl p-6 sm:p-8 mb-8 relative z-10">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+            <h4 class="text-base sm:text-lg font-heading font-bold text-white">Solicitar Clave de Acceso (Trial 100 Consultas)</h4>
+          </div>
+          <p class="text-xs text-gray-400 mb-6 leading-relaxed">
+            Las claves de terceros se habilitan manualmente por email, cuentan con un cupo inicial de 100 consultas y se revocan automáticamente tras 30 días continuos sin actividad. Para investigadores de la UNMDP y proyectos cívicos el cupo es ampliable sin costo.
+          </p>
+
+          <form id="apiRegisterForm" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[11px] font-semibold text-gray-300 uppercase tracking-wider mb-1">Nombre o Cátedra</label>
+                <input type="text" id="reqName" required placeholder="Ej: Juan Pérez / Laboratorio UNMDP" class="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition">
+              </div>
+              <div>
+                <label class="block text-[11px] font-semibold text-gray-300 uppercase tracking-wider mb-1">Correo Electrónico</label>
+                <input type="email" id="reqEmail" required placeholder="tuemail@ejemplo.com" class="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-semibold text-gray-300 uppercase tracking-wider mb-1">Proyecto / Propósito de Uso</label>
+              <input type="text" id="reqPurpose" required placeholder="Ej: Tesis de transporte público, bot de Telegram, app de seguridad vial..." class="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition">
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center gap-4 pt-2">
+              <button type="submit" id="btnSubmitKey" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-heading font-bold text-xs shadow-lg shadow-purple-600/25 transition active:scale-95 flex items-center justify-center gap-2 cursor-pointer">
+                <i class="fa-solid fa-paper-plane"></i>
+                <span>Enviar Solicitud</span>
+              </button>
+              <div id="reqFeedback" class="text-xs"></div>
+            </div>
+          </form>
+        </div>
       </div>
 
       <!-- Badges de tecnologías utilizadas -->
       <div class="flex flex-wrap gap-2 pt-4 border-t border-white/5 relative z-10">
-        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-blue-300 border border-blue-500/20">Python 3.10+</span>
-        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-blue-300 border border-blue-500/20">GeoJSON & Vector GIS</span>
-        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-purple-300 border border-purple-500/20">Model Context Protocol (MCP)</span>
-        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-indigo-300 border border-indigo-500/20">REST API & Micro-servicios</span>
-        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">Spatial Bounding Boxes (BBOX)</span>
-        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-emerald-300 border border-emerald-500/20">ETL & UTF-8 Transcoding</span>
-        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-purple-300 border border-purple-500/20">AI Agent Ready</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-purple-300 border border-purple-500/20">Vercel Serverless Functions</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-purple-300 border border-purple-500/20">Node.js ES6+</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-blue-300 border border-blue-500/20">Firebase Firestore REST</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-cyan-300 border border-cyan-500/20">Haversine Math (<20ms)</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-indigo-300 border border-indigo-500/20">Spatial Bounding Boxes (BBOX)</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-emerald-300 border border-emerald-500/20">UTF-8 Transcoding</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">Rate-Limit & Expiración 30d</span>
         <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">Arquitectura $0</span>
       </div>
     </div>
@@ -947,6 +998,49 @@
         window.location.href = `mailto:${getMail()}?subject=${sub}`;
       });
     });
+
+    // ─── Registro Interactivo de API Key para Developers ──────────────────────
+    const apiRegisterForm = document.getElementById('apiRegisterForm');
+    if (apiRegisterForm) {
+      apiRegisterForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('btnSubmitKey');
+        const feedback = document.getElementById('reqFeedback');
+        const name = document.getElementById('reqName').value.trim();
+        const email = document.getElementById('reqEmail').value.trim();
+        const purpose = document.getElementById('reqPurpose').value.trim();
+
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Registrando...</span>';
+        feedback.innerHTML = '<span class="text-cyan-400">Enviando solicitud al servidor...</span>';
+
+        try {
+          const res = await fetch('https://mdp-data-engine.vercel.app/api/v1/auth/request-key', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, purpose })
+          });
+          const data = await res.json();
+          if (res.ok && data.success) {
+            feedback.innerHTML = `
+              <div class="p-3 mt-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs space-y-1">
+                <div class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-check-circle"></i> ¡Solicitud registrada con éxito!</div>
+                <div>Clave generada: <code class="bg-black/40 px-1.5 py-0.5 rounded text-cyan-300 font-mono select-all">${data.key}</code></div>
+                <div class="text-[11px] text-gray-300">Estado: <strong class="text-amber-400 uppercase">Pendiente de revisión</strong>. Pedro Soria validará tu solicitud y te contactará por email para habilitar las 100 consultas.</div>
+              </div>
+            `;
+            apiRegisterForm.reset();
+          } else {
+            feedback.innerHTML = `<span class="text-rose-400 font-medium">❌ ${data.error || 'Ocurrió un error al procesar la solicitud.'}</span>`;
+          }
+        } catch (err) {
+          feedback.innerHTML = '<span class="text-rose-400 font-medium">❌ Error de conexión con el servidor. Intenta nuevamente más tarde.</span>';
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> <span>Enviar Solicitud</span>';
+        }
+      });
+    }
   </script>
 </body>
 </html>
