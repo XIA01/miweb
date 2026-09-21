@@ -660,15 +660,122 @@
         <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">Datos Abiertos MGP (Conexión MGP)</span>
         <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">Tailwind CSS</span>
       </div>
+    </div>
 
-      <!-- Invitación a Developers -->
-      <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between flex-wrap gap-3 text-xs text-gray-400 relative z-10">
-        <span>¿Sos programador, investigador o estudiante y querés usar los datos?</span>
-        <a href="#developers" class="text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1.5 transition">
-          <span>Ver APIs en la Zona Developers</span>
-          <i class="fa-solid fa-arrow-right text-[10px]"></i>
-        </a>
+    <!-- TARJETA DESTACADA: GUÍA MDP -->
+    <div class="glass-card rounded-3xl p-6 sm:p-10 border border-blue-500/30 bg-gradient-to-br from-blue-950/30 via-slate-900/60 to-cyan-950/30 shadow-2xl relative overflow-hidden group mt-8">
+      <!-- Glow ambiental de la tarjeta -->
+      <div class="absolute -top-24 -right-24 w-72 h-72 bg-blue-600/15 rounded-full blur-3xl pointer-events-none group-hover:bg-blue-600/25 transition-all duration-500"></div>
+
+      <!-- Cabecera del proyecto -->
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8 border-b border-white/5 pb-6 relative z-10">
+        <div class="flex items-start gap-4">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-cyan-600 to-blue-500 flex items-center justify-center text-3xl shadow-lg shadow-cyan-500/30 shrink-0">
+            🌊
+          </div>
+          <div>
+            <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+              <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-wider flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                En Producción · Libre 24hs
+              </span>
+              <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                🚕 Copiar para Uber / Didi
+              </span>
+              <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                🏄 940 Puntos Recreativos & Gastro
+              </span>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-heading font-extrabold text-white group-hover:text-cyan-300 transition">
+              Guía MDP — Qué Hacer & Dónde Comer en Mar del Plata
+            </h3>
+            <p class="text-xs sm:text-sm font-medium text-cyan-300/90 mt-0.5">
+              Guía Visual con Fotografías HD, Deportes de Aventura, Paseos Marítimos y Gastronomía
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 shrink-0">
+          <a href="https://guiamdp.vercel.app" target="_blank" class="py-3 px-5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-heading font-bold text-xs shadow-lg shadow-cyan-600/25 transition flex items-center gap-2 transform active:scale-95">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <span>Probar App en Vivo</span>
+          </a>
+          <a href="https://github.com/XIA01/guiamdp" target="_blank" class="py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white text-xs font-semibold flex items-center gap-2 transition" title="Ver código fuente">
+            <i class="fa-brands fa-github text-sm"></i>
+            <span>GitHub</span>
+          </a>
+        </div>
       </div>
+
+      <!-- Descripción principal -->
+      <p class="text-sm text-gray-300 leading-relaxed mb-8 relative z-10 max-w-4xl">
+        Aplicación cívica y turística diseñada para responder a la pregunta clásica: <em>¿Qué hacemos hoy o dónde vamos a comer en Mar del Plata?</em> Unifica <strong>140 actividades recreativas oficiales</strong> (surf en Playa Grande, parapente en acantilados, buceo, excursiones marítimas en el puerto, miradores) y <strong>803 locales gastronómicos</strong> (marisquerías, cervecerías de Güemes/Olavarría, cafés y heladerías). Incorpora un botón exclusivo para <strong>copiar la dirección exacta al portapapeles y pegarla al vuelo en Uber, Didi o Cabify</strong>.
+      </p>
+
+      <!-- Grilla de innovaciones técnicas destacadas -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 relative z-10">
+
+        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-amber-500/30 transition">
+          <div class="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-sm font-bold">
+            🚕
+          </div>
+          <h4 class="text-sm font-heading font-bold text-white">1-Click Copiar para Uber/Didi</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Formatea la dirección exacta con calle, altura y barrio lista para pegar en el destino de la app de viajes sin escribir en la calle.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-cyan-500/30 transition">
+          <div class="w-8 h-8 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-sm font-bold">
+            🏄
+          </div>
+          <h4 class="text-sm font-heading font-bold text-white">140 Actividades & Aventura</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Escuelas de surf, parapente, buceo autónomo, pesca embarcada, paseos náuticos, ferias de artesanos y miradores costeros.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-emerald-500/30 transition">
+          <div class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-bold">
+            🍽️
+          </div>
+          <h4 class="text-sm font-heading font-bold text-white">803 Locales Gastronómicos</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Polo cervecero artesanal, mariscos en el puerto, parrillas, cafés de especialidad con medialunas y opciones verificadas Sin TACC.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2 hover:border-blue-500/30 transition">
+          <div class="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-sm font-bold">
+            📍
+          </div>
+          <h4 class="text-sm font-heading font-bold text-white">Cercanía GPS a Pie</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Filtro "Cerca Mío" que calcula en milisegundos la distancia Haversine a cada lugar para saber a cuántos metros estás de cada actividad.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Badges de tecnologías utilizadas -->
+      <div class="flex flex-wrap gap-2 pt-4 border-t border-white/5 relative z-10">
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-cyan-300 border border-cyan-500/20">PWA Offline-First</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-amber-300 border border-amber-500/20">Uber / Didi Clip Integration</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">JavaScript ES6+</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">HTML5 Geolocation (GPS)</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-emerald-300 border border-emerald-500/20">Datos Abiertos MGP</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-gray-300 border border-white/5">Tailwind CSS</span>
+        <span class="px-2.5 py-1 rounded-lg text-xs bg-white/5 text-blue-300 border border-blue-500/20">Arquitectura $0</span>
+      </div>
+    </div>
+
+    <!-- Invitación a Developers -->
+    <div class="mt-8 pt-6 border-t border-white/5 flex items-center justify-between flex-wrap gap-3 text-xs text-gray-400 relative z-10">
+      <span>¿Sos programador, investigador o estudiante y querés usar los datos del municipio?</span>
+      <a href="#developers" class="text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1.5 transition">
+        <span>Ver APIs en la Zona Developers</span>
+        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+      </a>
     </div>
   </section>
 

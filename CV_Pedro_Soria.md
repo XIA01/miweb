@@ -51,7 +51,16 @@ Combino una década de servicio en seguridad pública y pericias forenses digita
 * **Brújula Táctica HUD:** Orientación física mediante DeviceOrientation API (giroscopio y compás magnético).
 * **Datos Abiertos:** Integración del dataset oficial de Conexión MGP (Municipalidad de General Pueyrredon) con mapeo sobre OpenStreetMap nocturno táctico.
 
-### 4. MDP Data Engine — Motor Cívico de Datos, GIS & Contexto para Agentes IA (Mar del Plata)
+### 4. Guía MDP — Qué Hacer & Dónde Comer en Mar del Plata (Servicios Mar del Plata)
+*Guía visual y recreativa con 940 puntos auditados, fotos en alta definición y botón para copiar destino a Uber o Didi.*  
+🌐 **En Vivo:** [guiamdp.vercel.app](https://guiamdp.vercel.app) | 💻 **Repo:** [github.com/XIA01/guiamdp](https://github.com/XIA01/guiamdp)
+* **1-Click Integración para Uber / Didi:** Limpia y formatea la dirección exacta (`Calle + Altura + Barrio, Mar del Plata`) y la copia al portapapeles en milisegundos con notificación visual para pegarla directamente en apps de movilidad.
+* **140 Actividades Recreativas & Aventura:** Escuelas de surf en Playa Grande, parapente en los acantilados, buceo autónomo, pesca embarcada, excursiones marítimas, ferias y miradores.
+* **803 Locales Gastronómicos:** Puntos auditados con marisquerías del puerto, el polo cervecero de Güemes/Olavarría, cafés de especialidad con medialunas y locales verificados Sin TACC.
+* **Cercanía Satelital GPS:** Filtro "Cerca Mío" que recalcula en tiempo real la distancia esférica a pie con la fórmula de Haversine.
+* **PWA Offline-First:** Carga instantánea mediante Service Workers y almacenamiento local en el celular.
+
+### 5. MDP Data Engine — Motor Cívico de Datos, GIS & Contexto para Agentes IA (Mar del Plata)
 *Infraestructura de datos urbanos, auditoría automatizada y pipeline geoespacial para aplicaciones cívicas y modelos de lenguaje.*  
 💻 **Infraestructura Privada & APIs de Integración**
 * **Auditoría Integral del Catálogo:** Crawler concurrente sobre los 424 conjuntos de datos únicos de `datos.mardelplata.gob.ar` con semáforo de recencia y análisis de formatos (1.866 CSV, 467 PDF).
@@ -59,19 +68,19 @@ Combino una década de servicio en seguridad pública y pericias forenses digita
 * **209.000+ Geometrías e Incidentes Urbanos:** Indexación limpia de 10.081 paradas de colectivo, 1.335 semáforos, cinemómetros/radares viales, redes de infraestructura y establecimientos de salud.
 * **Capa de Contexto para Agentes IA:** Diseñado para integrarse vía Model Context Protocol (MCP) y APIs REST para alimentar modelos de IA y aplicaciones móviles.
 
-### 5. Mi Abuelito — Control de Salud Familiar & Planilla Médica Digital
+### 6. Mi Abuelito — Control de Salud Familiar & Planilla Médica Digital
 *Aplicación móvil y web colaborativa para el seguimiento familiar de signos vitales.*  
 🌐 **En Vivo:** [mi-abuelito.netlify.app](https://mi-abuelito.netlify.app) | 💻 **Repo:** [github.com/XIA01/mi-abuelito](https://github.com/XIA01/mi-abuelito)
 * **Multiplataforma Flutter 3:** Construida con Flutter y sincronizada en tiempo real mediante Firebase Firestore sin necesidad de logins tediosos para adultos mayores.
 * **Exportación Médica en PDF:** Motor de maquetación vectorial para generar y compartir planillas clínicas imprimibles de glucosa, presión y medicación en formato hospitalario.
 
-### 6. Lazo Cuántico (Orion) — Transferencia Efímera Zero-Trace
+### 7. Lazo Cuántico (Orion) — Transferencia Efímera Zero-Trace
 *Herramienta instantánea para transferir enlaces, notas y archivos entre PC y celular sin sesiones personales.*  
 🌐 **En Vivo:** [lazocuantico.netlify.app](https://lazocuantico.netlify.app) | 💻 **Repo:** [github.com/XIA01/orion](https://github.com/XIA01/orion)
 * **Emparejamiento Efímero:** Basado en códigos temporales de 4 dígitos o QR instantáneo con autodestrucción inmediata.
 * **Privacidad Total:** Evita tener que iniciar sesión en WhatsApp Web o Gmail en computadoras ajenas o de trabajo.
 
-### 7. AINS Framework — Infraestructura de Sociedades Automatizadas (2025–2026)
+### 8. AINS Framework — Infraestructura de Sociedades Automatizadas (2025–2026)
 *Infraestructura de software para despliegue de organizaciones y toma de decisiones operadas por IA.*
 * Arquitectura 3 capas con aislamiento multi-tenant por instancia (Docker + PostgreSQL).
 * **Libro Diario Criptográfico:** Árbol de Merkle con firma RSA-PSS 4096-bit y sellado forense.
