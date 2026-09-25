@@ -108,7 +108,7 @@ Combino una década de servicio en seguridad pública y pericias forenses digita
 ### Policía de la Provincia de Buenos Aires / Policía Local
 **2012 – 2023 (10 años de servicio) | Mar del Plata, Argentina**
 * **Pericias Informáticas & Análisis Forense Digital:** Extracción y análisis pericial de dispositivos móviles, preservación de evidencia digital, cadena de custodia y elaboración de informes técnicos forenses para fiscalías y juzgados.
-* **Innovación Tecnológica Aplicada:** Desarrollador y creador de la primera aplicación móvil de seguridad turística del municipio (premiado en 2015).
+* **Innovación Tecnológica Aplicada:** Desarrollador y creador de la primera aplicación móvil de seguridad turística del municipio ([distinción oficial en 2015](https://www.mardelplata.gob.ar/Noticias/mar-del-plata-cuenta-con-herramienta-de-innovacion-para-la-seguridad-del-visitante)).
 
 ### Plataforma de Streaming de Video (Emprendimiento Temprano)
 **2007 – 2010 | Argentina**

@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
-import { Mail, MessageCircle, X } from 'lucide-react'
+import { ExternalLink, Mail, MessageCircle, X } from 'lucide-react'
 import { GithubIcon } from './icons'
 import { profile, services } from '../data/projects'
 
@@ -47,10 +47,28 @@ function About() {
           trazabilidad, privacidad de datos y resiliencia. Estudio Ingeniería en Informática y la Tecnicatura en
           Protección de Datos en la UNMDP.
         </p>
-        <p data-reveal>
-          <span className="text-amber-300">Diploma de Honor Municipal (2015)</span> por crear la primera app móvil de
-          seguridad turística de Mar del Plata.
-        </p>
+        <div data-reveal className="mt-4 rounded-xl border border-amber-400/25 bg-amber-400/5 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-base">🏆</span>
+              <span className="text-[12px] font-bold uppercase tracking-wider text-amber-300">
+                Reconocimiento Municipal Oficial (2015)
+              </span>
+            </div>
+            <p className="mt-1 text-[13px] text-slate-300 leading-snug">
+              Diploma de Honor por crear la primera app móvil de seguridad turística de Mar del Plata, presentada en el COM.
+            </p>
+          </div>
+          <a
+            href="https://www.mardelplata.gob.ar/Noticias/mar-del-plata-cuenta-con-herramienta-de-innovacion-para-la-seguridad-del-visitante"
+            target="_blank"
+            rel="noreferrer"
+            className="shrink-0 inline-flex items-center gap-1.5 rounded-lg border border-amber-400/30 bg-amber-400/10 hover:bg-amber-400/20 px-3 py-1.5 text-[12px] font-semibold text-amber-200 transition"
+          >
+            <span>Ver Nota Oficial</span>
+            <ExternalLink size={13} />
+          </a>
+        </div>
       </div>
     </>
   )
