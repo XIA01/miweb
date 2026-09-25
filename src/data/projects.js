@@ -1,5 +1,5 @@
 // Proyectos reales publicados en el portafolio (misma fuente que clasico.html y el CV).
-// `featured` marca la tarjeta central destacada; el resto se reparte a izquierda/derecha.
+// El orden define la posición inicial en la órbita (el primero arranca al frente).
 
 export const projects = [
   {
@@ -8,7 +8,6 @@ export const projects = [
     category: 'Videovigilancia P2P · WebRTC',
     icon: 'cctv',
     color: '#22d3ee',
-    featured: true,
     summary:
       'Sistema de videovigilancia distribuida que reutiliza celulares en desuso como cámaras, sin servidores intermedios.',
     highlights: [

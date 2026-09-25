@@ -7,7 +7,11 @@ export const glslHash = /* glsl */ `
   float hash31(vec3 p) { p = fract(p * 0.1031); p += dot(p, p.zyx + 31.32); return fract((p.x + p.y) * p.z); }
 `
 
+// El vertex shader incluye los chunks de skinning de three.js: funciona igual con
+// mallas estáticas y con SkinnedMesh (p. ej. el modelo GLTF de Mixamo).
 const vertexShader = /* glsl */ `
+  #include <common>
+  #include <skinning_pars_vertex>
   uniform float uTime;
   uniform float uGlitch;
   varying vec3 vWorldPos;
@@ -17,8 +21,13 @@ const vertexShader = /* glsl */ `
   ${glslHash}
 
   void main() {
-    vec3 pos = position;
-    vec4 world = modelMatrix * vec4(pos, 1.0);
+    #include <skinbase_vertex>
+    #include <beginnormal_vertex>
+    #include <skinnormal_vertex>
+    #include <begin_vertex>
+    #include <skinning_vertex>
+
+    vec4 world = modelMatrix * vec4(transformed, 1.0);
 
     // Glitch horizontal esporádico: desplaza franjas finas del holograma.
     float slice = floor(world.y * 18.0);
@@ -27,8 +36,8 @@ const vertexShader = /* glsl */ `
     world.x += (hash21(vec2(tick, slice)) - 0.5) * 0.12 * g;
 
     vWorldPos = world.xyz;
-    vObjPos = pos;
-    vNormalW = normalize(mat3(modelMatrix) * normal);
+    vObjPos = transformed;
+    vNormalW = normalize(mat3(modelMatrix) * objectNormal);
     vViewDir = normalize(cameraPosition - world.xyz);
     gl_Position = projectionMatrix * viewMatrix * world;
   }
@@ -43,6 +52,7 @@ const fragmentShader = /* glsl */ `
   uniform float uBaseY;
   uniform vec3 uChest;
   uniform float uCircuit;
+  uniform float uCircuitScale;
   varying vec3 vWorldPos;
   varying vec3 vObjPos;
   varying vec3 vNormalW;
@@ -79,7 +89,7 @@ const fragmentShader = /* glsl */ `
     float sweep = pow(1.0 - abs(fract(vWorldPos.y * 0.25 - uTime * 0.35) * 2.0 - 1.0), 18.0);
 
     // Circuitos que parpadean sobre la superficie.
-    vec3 cp = vObjPos * 9.0;
+    vec3 cp = vObjPos * uCircuitScale;
     vec3 cell = floor(cp);
     vec3 fc = fract(cp);
     float lineMask = step(0.93, max(fc.x, max(fc.y, fc.z)));
@@ -119,6 +129,7 @@ export function createHologramMaterial(overrides = {}) {
       uBaseY: { value: -1.9 },
       uChest: { value: new THREE.Vector3(0, 1.0, 0.45) },
       uCircuit: { value: 1 },
+      uCircuitScale: { value: 9 },
       uGlitch: { value: 1 },
       ...overrides,
     },

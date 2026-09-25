@@ -1,9 +1,11 @@
 import { useMemo, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { Html, Line } from '@react-three/drei'
+import { Html } from '@react-three/drei'
 import * as THREE from 'three'
 import ProjectCard from '../ui/ProjectCard'
-import { DISTANCE_FACTOR, HANDS, pxToWorld } from './layout'
+import { CARD_PX, DISTANCE_FACTOR, ORBIT, cardAngle, orbitPosition } from './layout'
+
+const pxToWorld = (px) => (px * DISTANCE_FACTOR) / 400
 
 const frameVertex = /* glsl */ `varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`
 const frameFragment = /* glsl */ `
@@ -25,14 +27,30 @@ const frameFragment = /* glsl */ `
   }
 `
 
-function NeonFrame({ w, h, color, hovered, focused, dimmed }) {
-  const mat = useMemo(
+const W = pxToWorld(CARD_PX.w) + 0.18
+const H = pxToWorld(CARD_PX.h) + 0.18
+
+/**
+ * Tarjeta en órbita. Cada frame:
+ *   θ = orbit.angle + i·2π/n
+ *   x = cx + sin(θ)·rx,  z = cz + cos(θ)·rz,  y = cy − cos(θ)·tilt
+ * y se orienta hacia la cámara (billboard) para leerse siempre de frente.
+ */
+function OrbitingCard({ project, index, count, orbit, positions, hovered, focusedId, onHover, onOpen, portal }) {
+  const group = useRef()
+  const dom = useRef()
+  const isHovered = hovered === project.id
+  const isFocused = focusedId === project.id
+  const dimmed = Boolean(focusedId) && !isFocused
+  const pos = useMemo(() => (positions[project.id] = new THREE.Vector3()), [positions, project.id])
+
+  const frame = useMemo(
     () =>
       new THREE.ShaderMaterial({
         uniforms: {
-          uColor: { value: new THREE.Color(color) },
-          uIntensity: { value: 1.6 },
-          uSize: { value: new THREE.Vector2(w, h) },
+          uColor: { value: new THREE.Color(project.color) },
+          uIntensity: { value: 1.4 },
+          uSize: { value: new THREE.Vector2(W, H) },
           uTime: { value: 0 },
         },
         vertexShader: frameVertex,
@@ -41,105 +59,82 @@ function NeonFrame({ w, h, color, hovered, focused, dimmed }) {
         depthWrite: false,
         blending: THREE.AdditiveBlending,
       }),
-    [w, h, color],
+    [project.color],
   )
-  useFrame((s, dt) => {
-    mat.uniforms.uTime.value = s.clock.elapsedTime
-    const target = dimmed ? 0.15 : hovered || focused ? 2.8 : 1.4
-    mat.uniforms.uIntensity.value = THREE.MathUtils.damp(mat.uniforms.uIntensity.value, target, 8, dt)
-  })
-  return (
-    <mesh material={mat} position={[0, 0, -0.02]}>
-      <planeGeometry args={[w, h]} />
-    </mesh>
-  )
-}
-
-function FloatingCard({ project, slot, index, hovered, focusedId, onHover, onOpen, portal }) {
-  const group = useRef()
-  const inner = useRef()
-  const w = pxToWorld(slot.size.w) + 0.18
-  const h = pxToWorld(slot.size.h) + 0.18
-  const isHovered = hovered === project.id
-  const isFocused = focusedId === project.id
-  const dimmed = focusedId && !isFocused
 
   useFrame((state, dt) => {
     const t = state.clock.elapsedTime
-    const [x, y, z] = slot.position
-    group.current.position.set(x, y + Math.sin(t * 0.8 + index * 1.3) * 0.07, z)
-    group.current.rotation.set(
-      slot.rotation[0] + Math.sin(t * 0.5 + index) * 0.015,
-      slot.rotation[1] + Math.cos(t * 0.4 + index) * 0.02,
-      0,
-    )
-    const s = isHovered && !focusedId ? 1.07 : 1
-    inner.current.scale.setScalar(THREE.MathUtils.damp(inner.current.scale.x, s, 10, dt))
-    inner.current.position.z = THREE.MathUtils.damp(inner.current.position.z, isHovered ? 0.25 : 0, 10, dt)
-    // Actualiza matrices antes de que <Html> calcule su CSS (evita desfase DOM/WebGL).
+    const theta = cardAngle(index, count, orbit.angle)
+    orbitPosition(theta, pos)
+    pos.y += Math.sin(t * 0.8 + index * 1.3) * 0.06 // flotación idle
+    group.current.position.copy(pos)
+    group.current.lookAt(state.camera.position)
+
+    // Profundidad: 1 adelante, 0 atrás. Las traseras se desvanecen y no reciben clicks.
+    const front = (Math.cos(theta) + 1) / 2
+    const visible = dimmed ? 0.1 : 0.08 + 0.92 * THREE.MathUtils.smoothstep(front, 0.2, 0.75)
+    if (dom.current) {
+      dom.current.style.opacity = visible.toFixed(3)
+      dom.current.style.pointerEvents = !dimmed && front > 0.4 ? 'auto' : 'none'
+    }
+
+    // Hover: escala + borde más intenso.
+    const s = THREE.MathUtils.damp(group.current.scale.x, isHovered && !focusedId ? 1.15 : 1, 10, dt)
+    group.current.scale.set(s, s, s)
+    frame.uniforms.uTime.value = t
+    const glow = (isHovered || isFocused ? 2.8 : 1.4) * visible
+    frame.uniforms.uIntensity.value = THREE.MathUtils.damp(frame.uniforms.uIntensity.value, glow, 8, dt)
+
+    // Matrices al día antes de que <Html> calcule su CSS (evita desfase DOM/WebGL).
     group.current.updateMatrixWorld(true)
   }, -1)
 
-  // Línea de energía desde el borde interno de la tarjeta hasta la mano correspondiente.
-  const hand = slot.side < 0 ? HANDS.left : slot.side > 0 ? HANDS.right : null
-  const linePoints = useMemo(() => {
-    if (!hand) return null
-    const edge = [slot.position[0] - slot.side * (w / 2), slot.position[1], slot.position[2]]
-    const mid = [(edge[0] + hand[0]) / 2, edge[1], (edge[2] + hand[2]) / 2]
-    return [edge, mid, hand]
-  }, [hand, slot, w])
-
   return (
-    <>
-      {linePoints && (
-        <Line
-          points={linePoints}
-          color={isHovered ? project.color : '#1fb6d9'}
-          lineWidth={isHovered ? 1.6 : 0.8}
-          transparent
-          opacity={dimmed ? 0.08 : isHovered ? 0.9 : 0.35}
-          dashed={!isHovered}
-          dashSize={0.12}
-          gapSize={0.08}
-        />
-      )}
-      <group ref={group}>
-        <group ref={inner}>
-          <NeonFrame w={w} h={h} color={project.color} hovered={isHovered} focused={isFocused} dimmed={dimmed} />
-          <Html
-            transform
-            portal={portal}
-            distanceFactor={DISTANCE_FACTOR}
-            zIndexRange={[30, 10]}
-            style={{ transition: 'opacity .5s', opacity: dimmed ? 0.12 : 1, pointerEvents: dimmed ? 'none' : 'auto' }}
-          >
-            <ProjectCard
-              project={project}
-              variant={slot.featured ? 'featured' : 'side'}
-              index={index}
-              active={isHovered || isFocused}
-              onHover={onHover}
-              onOpen={onOpen}
-            />
-          </Html>
-        </group>
-      </group>
-    </>
+    <group ref={group}>
+      <mesh material={frame} position={[0, 0, -0.02]}>
+        <planeGeometry args={[W, H]} />
+      </mesh>
+      <Html transform portal={portal} distanceFactor={DISTANCE_FACTOR} zIndexRange={[30, 10]}>
+        <div ref={dom} style={{ transition: 'opacity .35s' }}>
+          <ProjectCard project={project} index={index} active={isHovered || isFocused} onHover={onHover} onOpen={onOpen} />
+        </div>
+      </Html>
+    </group>
   )
 }
 
-export default function ProjectCards3D({ projects, layout, hovered, focusedId, onHover, onOpen, portal }) {
-  return projects.map((p, i) => (
-    <FloatingCard
-      key={p.id}
-      project={p}
-      slot={layout[p.id]}
-      index={i}
-      hovered={hovered}
-      focusedId={focusedId}
-      onHover={onHover}
-      onOpen={onOpen}
-      portal={portal}
-    />
-  ))
+/**
+ * Avanza el ángulo global de la órbita. `orbit.speed` se amortigua a 0 en hover
+ * (pausa suave) y queda en 0 mientras hay un proyecto abierto (GSAP controla el ángulo).
+ */
+function OrbitDriver({ orbit, hovered, focusedId }) {
+  useFrame((_, dt) => {
+    const target = hovered || focusedId ? 0 : 1
+    orbit.speed = THREE.MathUtils.damp(orbit.speed, target, hovered ? 6 : 1.5, dt)
+    if (!orbit.locked) orbit.angle += ORBIT.speed * orbit.speed * dt
+  }, -3)
+  return null
+}
+
+export default function ProjectCards3D({ projects, orbit, positions, hovered, focusedId, onHover, onOpen, portal }) {
+  return (
+    <>
+      <OrbitDriver orbit={orbit} hovered={hovered} focusedId={focusedId} />
+      {projects.map((p, i) => (
+        <OrbitingCard
+          key={p.id}
+          project={p}
+          index={i}
+          count={projects.length}
+          orbit={orbit}
+          positions={positions}
+          hovered={hovered}
+          focusedId={focusedId}
+          onHover={onHover}
+          onOpen={onOpen}
+          portal={portal}
+        />
+      ))}
+    </>
+  )
 }

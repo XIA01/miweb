@@ -1,6 +1,6 @@
 import { ProjectIcon } from './icons'
 import CodeTicker from './CodeTicker'
-import { CARD_PX, FEATURED_PX } from '../three/layout'
+import { CARD_PX } from '../three/layout'
 
 function Preview({ project, className = '' }) {
   return (
@@ -33,7 +33,7 @@ function ViewButton({ project, onOpen, className = '' }) {
 
 /**
  * Tarjeta holográfica compartida entre la escena 3D (<Html transform>) y el carrusel móvil.
- * variant: 'side' | 'featured' | 'mobile'
+ * variant: 'side' | 'mobile'
  */
 export default function ProjectCard({ project, variant = 'side', index = 0, active, onHover, onOpen }) {
   const common = {
@@ -45,42 +45,6 @@ export default function ProjectCard({ project, variant = 'side', index = 0, acti
     onPointerEnter: () => onHover?.(project.id),
     onPointerLeave: () => onHover?.(null),
     style: { '--c': project.color },
-  }
-
-  if (variant === 'featured') {
-    return (
-      <article
-        {...common}
-        className={`holo-card featured ${active ? 'is-active' : ''} flex gap-3 p-3 text-left`}
-        style={{ ...common.style, width: FEATURED_PX.w, height: FEATURED_PX.h }}
-      >
-        <div className="flex w-[46%] flex-col">
-          <h3 className="card-title text-[17px] leading-none">{project.title}</h3>
-          <p className="card-cat mt-1 text-[9px]">{project.category}</p>
-          <Preview project={project} className="mt-2 h-[74px]" />
-          <p className="mt-2 text-[9.5px] leading-snug text-slate-300 line-clamp-3">{project.summary}</p>
-          <ViewButton project={project} onOpen={onOpen} className="mt-auto text-[10px]" />
-        </div>
-        <div className="flex min-w-0 flex-1 flex-col gap-2">
-          <div className="code-window flex-1">
-            <div className="code-bar">
-              <i className="bg-rose-400" />
-              <i className="bg-amber-300" />
-              <i className="bg-emerald-400" />
-              <span className="ml-2 truncate">{project.id}.src — live</span>
-            </div>
-            <CodeTicker code={project.code} lines={7} className="px-2 py-1 text-[8px] text-slate-200" />
-          </div>
-          <div className="code-window h-[46px] px-2 py-1 text-[7.5px] font-mono text-emerald-300/90">
-            <div>$ deploy --prod</div>
-            <div className="text-slate-400">✓ {project.live.replace(/^https:\/\//, '').split('/')[0]}</div>
-          </div>
-          <p className="text-[9px] tracking-wider text-slate-400">
-            {project.title} — Proyecto {String(index + 1).padStart(2, '0')}
-          </p>
-        </div>
-      </article>
-    )
   }
 
   if (variant === 'mobile') {

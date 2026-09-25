@@ -117,10 +117,6 @@ body {
     0 0 60px color-mix(in srgb, var(--c) 25%, transparent),
     inset 0 0 26px color-mix(in srgb, var(--c) 22%, transparent);
 }
-.holo-card.featured {
-  border-color: color-mix(in srgb, #fb923c 70%, var(--c));
-  box-shadow: 0 0 20px rgba(251, 146, 60, 0.35), inset 0 0 18px rgba(34, 211, 238, 0.12);
-}
 .holo-card.mobile {
   background: rgba(5, 13, 26, 0.86);
   backdrop-filter: blur(6px);

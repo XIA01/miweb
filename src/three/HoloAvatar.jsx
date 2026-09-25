@@ -1,89 +1,54 @@
-import { useLayoutEffect, useMemo, useRef } from 'react'
-import { useFrame } from '@react-three/fiber'
+import { useMemo, useRef } from 'react'
+import { useFrame, useLoader } from '@react-three/fiber'
 import * as THREE from 'three'
-import { MeshSurfaceSampler } from 'three/examples/jsm/math/MeshSurfaceSampler.js'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js'
 import { createHologramMaterial } from './shaders/hologram'
 
+// "X Bot" de Mixamo (el mismo que usan los ejemplos oficiales de three.js), sin animaciones
+// y comprimido con meshopt. Se sirve desde /public.
+export const AVATAR_URL = '/models/xbot.glb'
+
 // Colores HDR (> 1) sin tone mapping: el bloom los convierte en destellos.
-const EYE_COLOR = new THREE.Color('#bff8ff').multiplyScalar(9)
-const CORE_COLOR = new THREE.Color('#7fe9ff').multiplyScalar(6)
+const EYE_COLOR = new THREE.Color('#bff8ff').multiplyScalar(7)
+const CORE_COLOR = new THREE.Color('#7fe9ff').multiplyScalar(3.5)
 const ORB_COLOR = new THREE.Color('#62d8ff').multiplyScalar(5)
+
+// Pose "sagrada": rotaciones (radianes, ejes locales del hueso Mixamo) sumadas a la pose de reposo (T-pose).
+const POSE = {
+  'mixamorigLeftArm': [0, 0.35, -0.45],
+  'mixamorigRightArm': [0, -0.35, 0.45],
+  'mixamorigLeftForeArm': [0, 0.25, 0.12],
+  'mixamorigRightForeArm': [0, -0.25, -0.12],
+  'mixamorigLeftHand': [0.9, 0, 0.1],
+  'mixamorigRightHand': [0.9, 0, -0.1],
+  'mixamorigSpine2': [-0.06, 0, 0],
+}
 
 const tmpV = new THREE.Vector3()
 const tmpHead = new THREE.Vector3()
+const tmpQ = new THREE.Quaternion()
+const tmpE = new THREE.Euler()
 
-function useTorsoGeometry() {
-  return useMemo(() => {
-    // Perfil (radio, altura) del torso: cintura que se disuelve abajo, pecho ancho arriba.
-    const pts = [
-      [0.0, -2.0], [0.38, -2.0], [0.42, -1.3], [0.4, -0.7], [0.44, -0.2], [0.55, 0.3],
-      [0.68, 0.8], [0.74, 1.15], [0.7, 1.42], [0.5, 1.62], [0.22, 1.74], [0.0, 1.76],
-    ].map(([r, y]) => new THREE.Vector2(r, y))
-    const g = new THREE.LatheGeometry(pts, 48)
-    g.scale(1, 1, 0.6)
-    g.computeVertexNormals()
-    return g
-  }, [])
-}
-
-function Arm({ side, material, orbRef }) {
-  // El brazo se modela del lado derecho (+x) y se espeja con scale.x = side.
-  const fingers = [-0.075, -0.025, 0.025, 0.075]
-  return (
-    <group scale={[side, 1, 1]}>
-      <group position={[0.76, 1.38, 0]} rotation={[0, -0.28, -0.4]}>
-        <mesh material={material} position={[0, 0, 0]} userData={{ sample: 0.7 }}>
-          <sphereGeometry args={[0.25, 24, 16]} />
-        </mesh>
-        <mesh material={material} position={[0.6, 0, 0]} rotation={[0, 0, Math.PI / 2]} userData={{ sample: 1 }}>
-          <capsuleGeometry args={[0.15, 0.95, 8, 20]} />
-        </mesh>
-        <group position={[1.18, 0, 0]} rotation={[0, -0.22, 0.14]}>
-          <mesh material={material}>
-            <sphereGeometry args={[0.14, 16, 12]} />
-          </mesh>
-          <mesh material={material} position={[0.52, 0, 0]} rotation={[0, 0, Math.PI / 2]} userData={{ sample: 0.9 }}>
-            <capsuleGeometry args={[0.12, 0.82, 8, 20]} />
-          </mesh>
-          {/* Mano abierta con la palma hacia adelante */}
-          <group position={[1.04, 0, 0]} rotation={[0, -0.25, 0.1]}>
-            <mesh material={material} position={[0.14, 0, 0]} scale={[0.17, 0.15, 0.055]}>
-              <sphereGeometry args={[1, 20, 14]} />
-            </mesh>
-            {fingers.map((y, i) => (
-              <mesh
-                key={i}
-                material={material}
-                position={[0.37, y * 1.2, 0]}
-                rotation={[0, 0, Math.PI / 2 + y * 2.2]}
-              >
-                <capsuleGeometry args={[0.022, 0.2 - Math.abs(y) * 0.5, 4, 8]} />
-              </mesh>
-            ))}
-            <mesh material={material} position={[0.12, 0.17, 0.02]} rotation={[0, 0, 0.35]}>
-              <capsuleGeometry args={[0.025, 0.14, 4, 8]} />
-            </mesh>
-            {/* Orbe de energía en la palma */}
-            <group ref={orbRef} position={[0.2, 0, 0.18]}>
-              <mesh>
-                <sphereGeometry args={[0.07, 16, 12]} />
-                <meshBasicMaterial color={ORB_COLOR} toneMapped={false} />
-              </mesh>
-              <mesh scale={2.6}>
-                <sphereGeometry args={[0.07, 16, 12]} />
-                <meshBasicMaterial color="#2bb8ff" transparent opacity={0.18} blending={THREE.AdditiveBlending} depthWrite={false} toneMapped={false} />
-              </mesh>
-              <pointLight color="#4fd8ff" intensity={6} distance={4} decay={2} />
-            </group>
-          </group>
-        </group>
-      </group>
-    </group>
+function glow(color, radius, opacity) {
+  const g = new THREE.Group()
+  const core = new THREE.Mesh(new THREE.SphereGeometry(radius, 16, 12), new THREE.MeshBasicMaterial({ color, toneMapped: false }))
+  const halo = new THREE.Mesh(
+    new THREE.SphereGeometry(radius * 2.6, 16, 12),
+    new THREE.MeshBasicMaterial({ color: '#39c6ff', transparent: true, opacity, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false }),
   )
+  g.add(core, halo)
+  return g
 }
 
-function SurfaceSparkles({ root, count }) {
-  const pointsRef = useRef()
+/** Adjunta `obj` al hueso conservando su transform de mundo (compensa la escala 0.01 del rig). */
+function attachAtWorld(bone, obj, worldPos) {
+  obj.position.copy(worldPos)
+  bone.parent.updateMatrixWorld(true)
+  bone.attach(obj)
+}
+
+function SurfaceSparkles({ points }) {
   const material = useMemo(
     () =>
       new THREE.ShaderMaterial({
@@ -93,7 +58,7 @@ function SurfaceSparkles({ root, count }) {
           attribute float aSeed;
           varying float vA;
           void main() {
-            vec3 p = position + normal * (0.02 + 0.05 * sin(uTime * 2.0 + aSeed * 40.0));
+            vec3 p = position + vec3(sin(aSeed * 91.0), cos(aSeed * 57.0), sin(aSeed * 13.0)) * 0.04 * sin(uTime * 2.0 + aSeed * 40.0);
             vec4 mv = modelViewMatrix * vec4(p, 1.0);
             float tw = 0.5 + 0.5 * sin(uTime * (2.0 + aSeed * 5.0) + aSeed * 90.0);
             vA = tw * tw;
@@ -104,8 +69,7 @@ function SurfaceSparkles({ root, count }) {
           varying float vA;
           void main() {
             float d = length(gl_PointCoord - 0.5);
-            float a = smoothstep(0.5, 0.0, d);
-            gl_FragColor = vec4(vec3(0.55, 0.95, 1.4) * 2.2, a * vA);
+            gl_FragColor = vec4(vec3(0.55, 0.95, 1.4) * 2.2, smoothstep(0.5, 0.0, d) * vA);
           }`,
         transparent: true,
         depthWrite: false,
@@ -113,177 +77,169 @@ function SurfaceSparkles({ root, count }) {
       }),
     [],
   )
-
-  useLayoutEffect(() => {
-    const group = root.current
-    if (!group) return
-    group.updateMatrixWorld(true)
-    const inv = new THREE.Matrix4().copy(group.matrixWorld).invert()
-    const meshes = []
-    group.traverse((o) => o.isMesh && o.userData.sample && meshes.push(o))
-    const total = meshes.reduce((s, m) => s + m.userData.sample, 0)
-    const positions = []
-    const normals = []
-    const seeds = []
-    const p = new THREE.Vector3()
-    const n = new THREE.Vector3()
-    meshes.forEach((m) => {
-      const sampler = new MeshSurfaceSampler(m).build()
-      const local = new THREE.Matrix4().multiplyMatrices(inv, m.matrixWorld)
-      const nm = new THREE.Matrix3().getNormalMatrix(local)
-      const k = Math.round((count * m.userData.sample) / total)
-      for (let i = 0; i < k; i++) {
-        sampler.sample(p, n)
-        p.applyMatrix4(local)
-        n.applyMatrix3(nm).normalize()
-        positions.push(p.x, p.y, p.z)
-        normals.push(n.x, n.y, n.z)
-        seeds.push(Math.random())
-      }
-    })
-    const g = new THREE.BufferGeometry()
-    g.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3))
-    g.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3))
-    g.setAttribute('aSeed', new THREE.Float32BufferAttribute(seeds, 1))
-    pointsRef.current.geometry.dispose()
-    pointsRef.current.geometry = g
-  }, [root, count])
-
   useFrame((state) => {
     material.uniforms.uTime.value = state.clock.elapsedTime
     material.uniforms.uPixelRatio.value = state.gl.getPixelRatio()
   })
-
-  return <points ref={pointsRef} material={material} />
+  if (!points) return null
+  return <points geometry={points} material={material} />
 }
 
 /**
- * Entidad IA holográfica procedural: torso lathe, cabeza articulada que mira la
- * tarjeta en hover, brazos extendidos con orbes de energía, núcleo neuronal en el pecho.
+ * Entidad IA: modelo GLTF humanoide con material holográfico, pose de brazos abiertos,
+ * ojos emisivos + PointLights en los huesos de los ojos, núcleo en el pecho y orbes en las palmas.
  */
 export default function HoloAvatar({ lookAt, active, isMobile, position = [0, 0, 0], scale = 1 }) {
+  const gltf = useLoader(GLTFLoader, AVATAR_URL, (loader) => loader.setMeshoptDecoder(MeshoptDecoder))
   const root = useRef()
-  const body = useRef()
-  const head = useRef()
-  const core = useRef()
-  const ringA = useRef()
-  const ringB = useRef()
-  const orbL = useRef()
-  const orbR = useRef()
-  const eyeLight = useRef()
-  const torso = useTorsoGeometry()
   const material = useMemo(() => createHologramMaterial(), [])
-  const headMaterial = useMemo(() => createHologramMaterial({ uCircuit: { value: 0.6 } }), [])
+
+  // Prepara el modelo una sola vez: materiales holográficos, pose, ojos, orbes y chispas.
+  const rig = useMemo(() => {
+    const model = gltf.scene
+    // useLoader cachea el GLTF: si ya se preparó (remontaje), se reutiliza tal cual.
+    if (model.userData.rig) return model.userData.rig
+    const bones = {}
+    const meshes = []
+    model.traverse((o) => {
+      if (o.isBone) bones[o.name] = o
+      if (o.isSkinnedMesh || o.isMesh) {
+        o.material = material
+        o.frustumCulled = false
+        meshes.push(o)
+      }
+    })
+
+    // Normaliza el tamaño: el X Bot mide ~1.8 u; lo llevamos a 1 u de alto con los pies en y=0.
+    model.updateMatrixWorld(true)
+    const box = new THREE.Box3().setFromObject(model)
+    const h = box.max.y - box.min.y
+    model.scale.multiplyScalar(1 / h)
+    model.position.y -= box.min.y / h
+
+    for (const [name, [x, y, z]] of Object.entries(POSE)) {
+      const b = bones[name]
+      if (!b) continue
+      b.quaternion.multiply(tmpQ.setFromEuler(tmpE.set(x, y, z)))
+    }
+    const head = bones['mixamorigHead']
+    const spine = bones['mixamorigSpine2']
+    const rest = { head: head.quaternion.clone(), spine: spine.quaternion.clone() }
+    model.updateMatrixWorld(true)
+
+    // Escala de los circuitos en unidades locales de la malla (cm del rig Mixamo).
+    const meshScale = meshes[0].getWorldScale(new THREE.Vector3()).x
+
+    // Ojos: esferas HDR + PointLight adjuntas a los huesos LeftEye / RightEye del modelo.
+    const eyes = ['mixamorigLeftEye', 'mixamorigRightEye'].map((name) => {
+      const bone = bones[name]
+      const p = bone.getWorldPosition(new THREE.Vector3())
+      p.z += 0.008
+      const eye = glow(EYE_COLOR, 0.0065, 0.22)
+      eye.scale.set(1.5, 0.8, 0.6)
+      const light = new THREE.PointLight('#8ff0ff', 0.6, 0.5, 2)
+      light.position.set(0, 0, 0.05)
+      eye.add(light)
+      attachAtWorld(bone, eye, p)
+      return eye
+    })
+
+    // Orbes de energía en las palmas.
+    const orbs = ['mixamorigLeftHand', 'mixamorigRightHand'].map((name, i) => {
+      const bone = bones[name]
+      const p = bone.getWorldPosition(new THREE.Vector3())
+      p.x += (i === 0 ? 1 : -1) * 0.05
+      p.z += 0.05
+      const orb = glow(ORB_COLOR, 0.016, 0.16)
+      orb.add(new THREE.PointLight('#4fd8ff', 1.2, 1.2, 2))
+      attachAtWorld(bone, orb, p)
+      return orb
+    })
+
+    // Núcleo del pecho con anillos.
+    const chest = spine.getWorldPosition(new THREE.Vector3())
+    chest.y += 0.04
+    chest.z += 0.1
+    const core = glow(CORE_COLOR, 0.012, 0.12)
+    const ringMat = new THREE.MeshBasicMaterial({ color: CORE_COLOR, toneMapped: false })
+    const ringA = new THREE.Mesh(new THREE.TorusGeometry(0.04, 0.003, 8, 48, Math.PI * 1.6), ringMat)
+    const ringB = new THREE.Mesh(new THREE.TorusGeometry(0.065, 0.002, 8, 64, Math.PI * 1.2), ringMat)
+    core.add(ringA, ringB, new THREE.PointLight('#5fe0ff', 0.8, 0.8, 2))
+    attachAtWorld(spine, core, chest)
+
+    // Chispas sobre la superficie ya posada (skinning aplicado con getVertexPosition).
+    const surface = meshes.find((m) => m.name.includes('Surface')) ?? meshes[0]
+    const neckY = bones['mixamorigNeck'].getWorldPosition(new THREE.Vector3()).y
+    const hipsY = bones['mixamorigHips'].getWorldPosition(new THREE.Vector3()).y
+    const count = surface.geometry.attributes.position.count
+    const pos = []
+    const seeds = []
+    const v = new THREE.Vector3()
+    for (let tries = 0; pos.length / 3 < 1400 && tries < 20000; tries++) {
+      surface.getVertexPosition(Math.floor(Math.random() * count), v)
+      v.applyMatrix4(surface.matrixWorld)
+      if (v.y > neckY || v.y < hipsY - 0.15) continue
+      pos.push(v.x, v.y, v.z)
+      seeds.push(Math.random())
+    }
+    const sparkles = new THREE.BufferGeometry()
+    sparkles.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3))
+    sparkles.setAttribute('aSeed', new THREE.Float32BufferAttribute(seeds, 1))
+
+    model.userData.rig = { model, head, spine, rest, eyes, orbs, core, ringA, ringB, sparkles, meshScale }
+    return model.userData.rig
+  }, [gltf, material])
 
   useFrame((state, delta) => {
     const t = state.clock.elapsedTime
-    for (const m of [material, headMaterial]) {
-      m.uniforms.uTime.value = t
-      const targetI = active ? 1.65 : 1.25
-      m.uniforms.uIntensity.value = THREE.MathUtils.damp(m.uniforms.uIntensity.value, targetI, 4, delta)
-      m.uniforms.uChest.value.set(position[0], root.current.position.y + 1.0 * scale, 0.45 * scale)
-      m.uniforms.uBaseY.value = position[1] - 1.9 * scale
-    }
+    const u = material.uniforms
+    u.uTime.value = t
+    u.uIntensity.value = THREE.MathUtils.damp(u.uIntensity.value, active ? 1.65 : 1.25, 4, delta)
 
     // Levitación y respiración suaves.
     root.current.position.y = position[1] + Math.sin(t * 0.7) * 0.06
-    body.current.scale.set(1 + Math.sin(t * 1.3) * 0.008, 1, 1 + Math.sin(t * 1.3) * 0.012)
+    rig.spine.quaternion.copy(rig.rest.spine).multiply(tmpQ.setFromEuler(tmpE.set(Math.sin(t * 1.3) * 0.015, 0, 0)))
+
+    // Uniforms en coordenadas de mundo: pecho (red neuronal) y base de la disolución.
+    rig.core.getWorldPosition(u.uChest.value)
+    u.uBaseY.value = position[1] + 0.3 * scale
+    u.uCircuitScale.value = 7 * rig.meshScale * scale
 
     // Mirada: orienta la cabeza hacia la tarjeta en hover (o al puntero).
-    const h = head.current
-    h.getWorldPosition(tmpHead)
+    rig.head.getWorldPosition(tmpHead)
     let yaw = Math.sin(t * 0.35) * 0.08
     let pitch = Math.sin(t * 0.5) * 0.03
     if (lookAt) {
-      tmpV.set(...lookAt).sub(tmpHead)
+      tmpV.copy(lookAt).sub(tmpHead)
       yaw = Math.atan2(tmpV.x, Math.max(0.5, tmpV.z + 3))
       pitch = -Math.atan2(tmpV.y, Math.hypot(tmpV.x, tmpV.z + 3)) * 0.8
     } else if (!isMobile) {
       yaw += state.pointer.x * 0.25
       pitch -= state.pointer.y * 0.12
     }
-    h.rotation.y = THREE.MathUtils.damp(h.rotation.y, THREE.MathUtils.clamp(yaw, -0.7, 0.7), 5, delta)
-    h.rotation.x = THREE.MathUtils.damp(h.rotation.x, THREE.MathUtils.clamp(pitch, -0.35, 0.35), 5, delta)
+    const hs = rig.head.userData
+    hs.yaw = THREE.MathUtils.damp(hs.yaw ?? 0, THREE.MathUtils.clamp(yaw, -0.7, 0.7), 5, delta)
+    hs.pitch = THREE.MathUtils.damp(hs.pitch ?? 0, THREE.MathUtils.clamp(pitch, -0.35, 0.35), 5, delta)
+    rig.head.quaternion.copy(rig.rest.head).multiply(tmpQ.setFromEuler(tmpE.set(hs.pitch, hs.yaw, 0)))
 
-    // Núcleo del pecho y orbes latiendo.
+    // Núcleo, orbes y ojos latiendo.
     const beat = 1 + Math.pow(Math.sin(t * 2.2) * 0.5 + 0.5, 6) * 0.35
-    core.current.scale.setScalar(beat)
-    ringA.current.rotation.z = t * 0.8
-    ringB.current.rotation.z = -t * 0.5
+    rig.core.children[0].scale.setScalar(beat)
+    rig.ringA.rotation.z = t * 0.8
+    rig.ringB.rotation.z = -t * 0.5
     const orbPulse = 1 + Math.sin(t * 3.1) * 0.12
-    orbL.current.scale.setScalar(orbPulse)
-    orbR.current.scale.setScalar(2 - orbPulse)
-    eyeLight.current.intensity = 3 + Math.sin(t * 5) * 0.4
+    rig.orbs[0].children[0].scale.setScalar(orbPulse)
+    rig.orbs[1].children[0].scale.setScalar(2 - orbPulse)
+    const flicker = 1 + Math.sin(t * 5) * 0.08
+    rig.eyes.forEach((e) => e.children[1].scale.setScalar(flicker))
   })
 
   return (
     <group ref={root} position={position} scale={scale}>
-      <group ref={body}>
-        <mesh geometry={torso} material={material} userData={{ sample: 3 }} />
-        {/* Collar y núcleo */}
-        <mesh material={material} position={[0, 1.72, 0]} rotation={[Math.PI / 2, 0, 0]}>
-          <torusGeometry args={[0.2, 0.035, 10, 32]} />
-        </mesh>
-        <group position={[0, 1.0, 0.43]}>
-          <mesh ref={core}>
-            <sphereGeometry args={[0.075, 20, 16]} />
-            <meshBasicMaterial color={CORE_COLOR} toneMapped={false} />
-          </mesh>
-          <mesh ref={ringA}>
-            <torusGeometry args={[0.17, 0.012, 8, 48, Math.PI * 1.6]} />
-            <meshBasicMaterial color={CORE_COLOR} toneMapped={false} />
-          </mesh>
-          <mesh ref={ringB}>
-            <torusGeometry args={[0.27, 0.007, 8, 64, Math.PI * 1.2]} />
-            <meshBasicMaterial color="#59d2ff" toneMapped={false} transparent opacity={0.8} />
-          </mesh>
-          <pointLight color="#5fe0ff" intensity={4} distance={3} />
-        </group>
-      </group>
-
-      <mesh material={material} position={[0, 1.88, 0]}>
-        <cylinderGeometry args={[0.12, 0.15, 0.36, 20, 1, true]} />
-      </mesh>
-
-      <group ref={head} position={[0, 2.02, 0]}>
-        <mesh material={headMaterial} position={[0, 0.33, 0]} scale={[0.82, 1.1, 0.92]}>
-          <sphereGeometry args={[0.31, 40, 32]} />
-        </mesh>
-        {/* Mandíbula / mentón */}
-        <mesh material={headMaterial} position={[0, 0.14, 0.07]} scale={[0.6, 0.45, 0.62]}>
-          <sphereGeometry args={[0.3, 24, 16]} />
-        </mesh>
-        {/* Receptores laterales */}
-        {[-1, 1].map((s) => (
-          <mesh key={s} material={headMaterial} position={[s * 0.25, 0.34, -0.02]} rotation={[0, 0, Math.PI / 2]}>
-            <cylinderGeometry args={[0.06, 0.06, 0.05, 20]} />
-          </mesh>
-        ))}
-        {/* Ojos con destello constante */}
-        {[-1, 1].map((s) => (
-          <group key={s} position={[s * 0.1, 0.35, 0.265]}>
-            <mesh scale={[1.5, 0.75, 0.6]}>
-              <sphereGeometry args={[0.026, 16, 12]} />
-              <meshBasicMaterial color={EYE_COLOR} toneMapped={false} />
-            </mesh>
-            <mesh scale={[3.2, 1.5, 1]}>
-              <sphereGeometry args={[0.026, 12, 10]} />
-              <meshBasicMaterial color="#6fe8ff" transparent opacity={0.25} blending={THREE.AdditiveBlending} depthWrite={false} toneMapped={false} />
-            </mesh>
-          </group>
-        ))}
-        <mesh position={[0, 0.56, 0.24]}>
-          <sphereGeometry args={[0.03, 12, 10]} />
-          <meshBasicMaterial color={CORE_COLOR} toneMapped={false} />
-        </mesh>
-        <pointLight ref={eyeLight} position={[0, 0.35, 0.45]} color="#8ff0ff" intensity={3} distance={2.5} />
-      </group>
-
-      <Arm side={-1} material={material} orbRef={orbL} />
-      <Arm side={1} material={material} orbRef={orbR} />
-
-      <SurfaceSparkles root={root} count={isMobile ? 700 : 1600} />
+      <primitive object={rig.model} />
+      <SurfaceSparkles points={rig.sparkles} />
     </group>
   )
 }
 
+useLoader.preload(GLTFLoader, AVATAR_URL, (loader) => loader.setMeshoptDecoder(MeshoptDecoder))
