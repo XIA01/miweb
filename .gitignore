@@ -10,3 +10,6 @@ Thumbs.db
 # AI Agents
 .gemini/
 .agy/
+
+node_modules/
+dist/
