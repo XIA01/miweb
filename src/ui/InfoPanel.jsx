@@ -52,9 +52,6 @@ function About() {
           seguridad turística de Mar del Plata.
         </p>
       </div>
-      <a href="/clasico.html" className="mt-5 inline-block text-[14px] text-cyan-300 underline-offset-4 hover:underline" data-reveal>
-        Ver portafolio completo en versión clásica →
-      </a>
     </>
   )
 }

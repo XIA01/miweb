@@ -3,7 +3,7 @@
 > Portafolio interactivo en Three.js: una entidad IA holográfica flota sobre una metrópolis ciberpunk
 > nocturna y presenta los proyectos reales en tarjetas holográficas flotantes.
 
-🌐 **En Vivo:** [soriam.vercel.app](https://soriam.vercel.app) · Versión clásica: `/clasico.html`
+🌐 **En Vivo:** [soriam.vercel.app](https://soriam.vercel.app)
 
 ---
 
@@ -19,7 +19,6 @@
 
 ```
 ├── index.html                  # Entrada Vite (fuentes, meta, contador de visitas)
-├── public/clasico.html         # Portafolio anterior completo (formularios, contacto, API)
 ├── public/models/xbot.glb      # "X Bot" de Mixamo (ejemplos de three.js), sin animaciones + meshopt
 ├── vercel.json                 # Build Vite → dist/
 └── src/

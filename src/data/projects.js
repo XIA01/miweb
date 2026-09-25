@@ -1,4 +1,4 @@
-// Proyectos reales publicados en el portafolio (misma fuente que clasico.html y el CV).
+// Proyectos reales publicados en el portafolio (misma fuente que el CV).
 // El orden define la posición inicial en la órbita (el primero arranca al frente).
 
 export const projects = [

@@ -90,7 +90,6 @@ export default function Header({ isMobile, active, onNavigate }) {
               {n.label}
             </button>
           ))}
-          <a href="/clasico.html" className="block px-4 py-3 text-[13px] text-slate-500">Versión clásica →</a>
         </nav>
       )}
     </header>
