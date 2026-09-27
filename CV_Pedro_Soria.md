@@ -70,7 +70,7 @@ Combino una década de servicio en seguridad pública y pericias forenses digita
 
 ### 6. Mi Abuelito — Control de Salud Familiar & Planilla Médica Digital
 *Aplicación móvil y web colaborativa para el seguimiento familiar de signos vitales.*  
-🌐 **En Vivo:** [mi-abuelito.netlify.app](https://mi-abuelito.netlify.app) | 💻 **Repo:** [github.com/XIA01/mi-abuelito](https://github.com/XIA01/mi-abuelito)
+🌐 **En Vivo:** [mi-abuelito.vercel.app](https://mi-abuelito.vercel.app) | 💻 **Repo:** [github.com/XIA01/mi-abuelito](https://github.com/XIA01/mi-abuelito)
 * **Multiplataforma Flutter 3:** Construida con Flutter y sincronizada en tiempo real mediante Firebase Firestore sin necesidad de logins tediosos para adultos mayores.
 * **Exportación Médica en PDF:** Motor de maquetación vectorial para generar y compartir planillas clínicas imprimibles de glucosa, presión y medicación en formato hospitalario.
 

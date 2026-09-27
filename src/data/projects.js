@@ -153,7 +153,7 @@ mcp.expose("mdp.context", index)`,
       'Exportación vectorial de planillas de glucosa, presión y medicación en formato hospitalario.',
     ],
     stack: ['Flutter 3', 'Dart', 'Firebase', 'PDF'],
-    live: 'https://mi-abuelito.netlify.app',
+    live: 'https://mi-abuelito.vercel.app',
     repo: 'https://github.com/XIA01/mi-abuelito',
     code: `final pdf = pw.Document();
 pdf.addPage(vitalsSheet(readings));
