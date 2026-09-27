@@ -2,8 +2,7 @@ import { useMemo, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { Html } from '@react-three/drei'
 import * as THREE from 'three'
-import ProjectCard from '../ui/ProjectCard'
-import { CARD_PX, DISTANCE_FACTOR, ORBIT, cardAngle, orbitPosition } from './layout'
+import { CARD_PX, DISTANCE_FACTOR, ORBIT, cardAngle, frontIndex, orbitPosition } from './layout'
 
 const pxToWorld = (px) => (px * DISTANCE_FACTOR) / 400
 
@@ -36,7 +35,7 @@ const H = pxToWorld(CARD_PX.h) + 0.18
  *   x = cx + sin(θ)·rx,  z = cz + cos(θ)·rz,  y = cy − cos(θ)·tilt
  * y se orienta hacia la cámara (billboard) para leerse siempre de frente.
  */
-function OrbitingCard({ project, index, count, orbit, positions, hovered, focusedId, onHover, onOpen, portal }) {
+function OrbitingCard({ project, index, count, orbit, positions, hovered, focusedId, renderCard, portal }) {
   const group = useRef()
   const dom = useRef()
   const isHovered = hovered === project.id
@@ -96,7 +95,7 @@ function OrbitingCard({ project, index, count, orbit, positions, hovered, focuse
       </mesh>
       <Html transform portal={portal} distanceFactor={DISTANCE_FACTOR} zIndexRange={[30, 10]}>
         <div ref={dom} style={{ transition: 'opacity .35s' }}>
-          <ProjectCard project={project} index={index} active={isHovered || isFocused} onHover={onHover} onOpen={onOpen} />
+          {renderCard(project, index, isHovered || isFocused)}
         </div>
       </Html>
     </group>
@@ -105,33 +104,41 @@ function OrbitingCard({ project, index, count, orbit, positions, hovered, focuse
 
 /**
  * Avanza el ángulo global de la órbita. `orbit.speed` se amortigua a 0 en hover
- * (pausa suave) y queda en 0 mientras hay un proyecto abierto (GSAP controla el ángulo).
+ * (pausa suave) y queda en 0 mientras hay un ítem abierto o un giro manual (GSAP controla el ángulo).
+ * Además avisa qué tarjeta quedó al frente (para la barra de navegación).
  */
-function OrbitDriver({ orbit, hovered, focusedId }) {
+function OrbitDriver({ orbit, count, hovered, focusedId, onFront }) {
+  const last = useRef(-1)
   useFrame((_, dt) => {
-    const target = hovered || focusedId ? 0 : 1
+    // pausa en hover, con un ítem abierto y unos segundos después de navegar con las flechas
+    const target = hovered || focusedId || performance.now() < (orbit.holdUntil ?? 0) ? 0 : 1
     orbit.speed = THREE.MathUtils.damp(orbit.speed, target, hovered ? 6 : 1.5, dt)
     if (!orbit.locked) orbit.angle += ORBIT.speed * orbit.speed * dt
+    const front = frontIndex(count, orbit.angle)
+    if (front !== last.current) {
+      last.current = front
+      onFront?.(front)
+    }
   }, -3)
   return null
 }
 
-export default function ProjectCards3D({ projects, orbit, positions, hovered, focusedId, onHover, onOpen, portal }) {
+/** items: proyectos o categorías (necesitan `id` y `color`); renderCard dibuja la tarjeta DOM. */
+export default function ProjectCards3D({ items, orbit, positions, hovered, focusedId, renderCard, onFront, portal }) {
   return (
     <>
-      <OrbitDriver orbit={orbit} hovered={hovered} focusedId={focusedId} />
-      {projects.map((p, i) => (
+      <OrbitDriver orbit={orbit} count={items.length} hovered={hovered} focusedId={focusedId} onFront={onFront} />
+      {items.map((p, i) => (
         <OrbitingCard
           key={p.id}
           project={p}
           index={i}
-          count={projects.length}
+          count={items.length}
           orbit={orbit}
           positions={positions}
           hovered={hovered}
           focusedId={focusedId}
-          onHover={onHover}
-          onOpen={onOpen}
+          renderCard={renderCard}
           portal={portal}
         />
       ))}

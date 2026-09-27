@@ -1,7 +1,8 @@
 # ⚡ Soria Matias — Developer · Portafolio 3D (City 01)
 
 > Portafolio interactivo en Three.js: una entidad IA holográfica flota sobre una metrópolis ciberpunk
-> nocturna y presenta los proyectos reales en tarjetas holográficas flotantes.
+> nocturna, ofrece "Software a medida" sobre su cabeza y presenta los proyectos agrupados en categorías
+> (Diversión, Mar del Plata, Utilidades, Developers) en tarjetas holográficas flotantes.
 
 🌐 **En Vivo:** [soriam.vercel.app](https://soriam.vercel.app)
 
@@ -35,19 +36,24 @@
     │   ├── City.jsx            # Rascacielos instanciados con ventanas procedurales, suelo, pedestal
     │   ├── Traffic.jsx         # Tráfico aéreo con estelas + drones con cono de luz
     │   ├── AmbientParticles.jsx
-    │   ├── ProjectCards3D.jsx  # Tarjetas <Html transform> orbitando en Y + marco neón con bloom
+    │   ├── ProjectCards3D.jsx  # Tarjetas <Html transform> (categorías o proyectos) orbitando en Y + marco neón
     │   └── PostFX.jsx          # UnrealBloomPass
-    └── ui/                     # Header, menú hamburguesa, carrusel móvil, modal, paneles, footer
+    └── ui/                     # Header, NavDock (flechas/puntos), carrusel móvil, tarjetas, modal, paneles
 ```
 
 ## 🎮 Interacciones
 
-- **Órbita:** las tarjetas giran continuamente en un anillo elíptico alrededor de la entidad (eje Y); las de atrás se desvanecen y no reciben clicks.
-- **Hover:** la órbita se frena suavemente, la tarjeta escala (`scale.set`), su borde neón se intensifica y la cabeza del avatar gira hacia ella.
-- **Click / VIEW PROJECT:** la órbita se detiene; `gsap` la gira hasta dejar la tarjeta al frente y lleva la cámara a un plano detalle con el panel de detalles, stack y enlaces. `VOLVER` (o `Esc`) regresa a la vista panorámica y la órbita se reanuda.
-- **Móvil:** avatar en la mitad superior, carrusel táctil con scroll-snap y menú hamburguesa.
+- **Título flotante:** "Desarrollador Soria · Software a medida" sobre la cabeza del avatar, con acceso directo a Contacto.
+- **Categorías:** en la vista inicial orbitan las categorías; al entrar a una, orbitan sus proyectos. `← CATEGORÍAS` (o `Esc`) vuelve.
+- **Órbita:** las tarjetas giran en un anillo elíptico alrededor de la entidad (eje Y); las de atrás se desvanecen y no reciben clicks.
+- **Navegación (escritorio):** barra abajo a la izquierda con flechas ‹ ›, un punto por tarjeta y la tarjeta del frente; también con las flechas del teclado. Tras navegar, la órbita espera unos segundos antes de volver a girar sola.
+- **Hover:** la órbita se frena suavemente, la tarjeta escala, su borde neón se intensifica y la cabeza del avatar gira hacia ella.
+- **Click / VIEW PROJECT:** la órbita se detiene; `gsap` la gira hasta dejar la tarjeta al frente y lleva la cámara a un plano detalle con el panel de detalles, stack y enlaces. `VOLVER` (o `Esc`) regresa a la vista panorámica.
+- **Perfil (arriba a la derecha):** abre Contacto (WhatsApp, mail, GitHub, LinkedIn) sin salir del sitio.
+- **Móvil:** avatar en la mitad superior, carrusel táctil con flechas y puntos, y menú hamburguesa.
 
-Las tarjetas se generan desde `src/data/projects.js`: agregar un proyecto ahí lo suma a la escena, al carrusel y al indicador lateral.
+Los proyectos y las categorías salen de `src/data/projects.js`. Un proyecto puede estar en más de una categoría
+(ej. WiFi MDP en Mar del Plata y Utilidades): basta con agregar su `id` a la lista `projects` de cada categoría.
 
 ## 🚀 Desarrollo
 

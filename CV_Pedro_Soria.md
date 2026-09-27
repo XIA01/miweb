@@ -80,7 +80,15 @@ Combino una década de servicio en seguridad pública y pericias forenses digita
 * **Emparejamiento Efímero:** Basado en códigos temporales de 4 dígitos o QR instantáneo con autodestrucción inmediata.
 * **Privacidad Total:** Evita tener que iniciar sesión en WhatsApp Web o Gmail en computadoras ajenas o de trabajo.
 
-### 8. AINS Framework — Infraestructura de Sociedades Automatizadas (2025–2026)
+### 8. PFIA — Penal Federal para Inteligencias Artificiales (Experiencia Interactiva con IA)
+*Experiencia web satírica: el visitante recorre un penal de IAs, conversa con reclusos algorítmicos y desata motines.*  
+🌐 **En Vivo:** [pfia.vercel.app](https://pfia.vercel.app)
+* **IA conversacional en cadena con respaldo:** Gemini 3.8 Flash → Gemma 4 → Groq (gpt-oss / Qwen) → motor procedural propio; los reclusos responden en personaje y recuerdan cada visita.
+* **Motor de película procedural:** cámara, sonido 100% sintetizado (Web Audio API) y narrativa que reaccionan en tiempo real a las acciones del visitante.
+* **Estado compartido en tiempo real:** contador global de tomates y visitas en Firestore que dispara motines entre todos los visitantes.
+* **Monetización segura:** login con Google (Firebase Auth) y créditos con Mercado Pago Checkout Pro, verificados y acreditados de forma idempotente del lado del servidor (webhook con firma HMAC).
+
+### 9. AINS Framework — Infraestructura de Sociedades Automatizadas (2025–2026)
 *Infraestructura de software para despliegue de organizaciones y toma de decisiones operadas por IA.*
 * Arquitectura 3 capas con aislamiento multi-tenant por instancia (Docker + PostgreSQL).
 * **Libro Diario Criptográfico:** Árbol de Merkle con firma RSA-PSS 4096-bit y sellado forense.

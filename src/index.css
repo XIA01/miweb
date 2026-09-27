@@ -258,19 +258,131 @@ body {
 }
 
 /* ---------- Indicadores ---------- */
-.side-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  border: 1px solid rgba(148, 196, 230, 0.55);
+/* ---------- navegación de la órbita (barra inferior y carrusel móvil) ---------- */
+.dock-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  border: 1.5px solid color-mix(in srgb, var(--c) 75%, white);
+  background: color-mix(in srgb, var(--c) 25%, transparent);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--c) 45%, transparent);
   transition: all 0.25s;
 }
-.side-dot:hover,
-.side-dot.is-on {
+.dock-dot:hover,
+.dock-dot.is-on {
   background: var(--c);
   border-color: var(--c);
-  box-shadow: 0 0 10px var(--c);
-  transform: scale(1.3);
+  box-shadow: 0 0 12px var(--c);
+  transform: scale(1.25);
+}
+.dock-dot.is-wide {
+  width: 26px;
+  transform: none;
+}
+.dock-arrow {
+  color: color-mix(in srgb, var(--c, #22d3ee) 70%, white);
+  border: 1px solid color-mix(in srgb, var(--c, #22d3ee) 55%, transparent);
+  background: color-mix(in srgb, var(--c, #22d3ee) 12%, rgba(4, 10, 20, 0.7));
+  box-shadow: 0 0 12px color-mix(in srgb, var(--c, #22d3ee) 30%, transparent);
+  transition: all 0.2s;
+}
+.dock-arrow:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--c, #22d3ee) 28%, rgba(4, 10, 20, 0.7));
+  box-shadow: 0 0 18px color-mix(in srgb, var(--c, #22d3ee) 55%, transparent);
+}
+.dock-back {
+  color: #a5f3fc;
+  border: 1px solid rgba(34, 211, 238, 0.35);
+  transition: background 0.2s;
+}
+.dock-back:hover {
+  background: rgba(34, 211, 238, 0.12);
+}
+.nav-dock {
+  border-color: color-mix(in srgb, var(--c) 40%, transparent);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--c) 20%, transparent);
+}
+
+/* chips con los proyectos de una categoría */
+.cat-chip {
+  border: 1px solid color-mix(in srgb, var(--c, #94a3b8) 55%, transparent);
+  background: color-mix(in srgb, var(--c, #94a3b8) 12%, transparent);
+  color: color-mix(in srgb, var(--c, #94a3b8) 60%, white);
+  border-radius: 999px;
+  padding: 0.1em 0.7em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+/* ---------- título flotando sobre el avatar ---------- */
+.hero-title {
+  text-align: center;
+  white-space: nowrap;
+  transition: opacity 0.5s, transform 0.5s;
+  animation: hero-float 5s ease-in-out infinite;
+  user-select: none;
+}
+.hero-title.is-hidden {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+.hero-title.is-hidden .hero-cta {
+  pointer-events: none;
+}
+.hero-kicker {
+  font-size: 13px;
+  letter-spacing: 0.5em;
+  color: #a5f3fc;
+  text-shadow: 0 0 10px rgba(34, 211, 238, 0.8);
+}
+.hero-main {
+  margin-top: 4px;
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  color: #ecfeff;
+  text-shadow: 0 0 12px rgba(34, 211, 238, 0.9), 0 0 32px rgba(34, 211, 238, 0.55), 0 0 60px rgba(56, 189, 248, 0.35);
+}
+.hero-cta {
+  pointer-events: auto;
+  margin-top: 10px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #031018;
+  background: linear-gradient(90deg, #22d3ee, #a5f3fc);
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.6);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.hero-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 28px rgba(34, 211, 238, 0.9);
+}
+.hero-title.is-mobile .hero-kicker {
+  font-size: 10px;
+  letter-spacing: 0.4em;
+}
+.hero-title.is-mobile .hero-main {
+  font-size: 25px;
+}
+.hero-title.is-mobile .hero-cta {
+  font-size: 10.5px;
+  padding: 5px 13px;
+  margin-top: 8px;
+}
+@keyframes hero-float {
+  50% {
+    translate: 0 -6px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-title {
+    animation: none;
+  }
 }
 
 .carousel {

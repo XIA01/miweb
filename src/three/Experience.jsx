@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useMemo, useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { Stars } from '@react-three/drei'
+import { Html, Stars } from '@react-three/drei'
 import gsap from 'gsap'
 import * as THREE from 'three'
 import City from './City'
@@ -23,12 +23,29 @@ function focusFor(selectedIndex, isMobile) {
   return { position: position.toArray(), target: target.toArray(), fov: HOME.desktop.fov }
 }
 
-export default function Experience({ projects, isMobile, hovered, selected, onHover, onOpen, reducedMotion }) {
-  const selectedIndex = projects.findIndex((p) => p.id === selected)
+/** Título flotando sobre la cabeza del avatar: qué ofrezco y acceso directo a contacto. */
+function HeroTitle({ isMobile, visible, onContact, portal }) {
+  return (
+    <Html position={[0, isMobile ? 3.55 : 3.75, 0]} center portal={portal} zIndexRange={[20, 0]} style={{ pointerEvents: 'none' }}>
+      <div className={`hero-title ${isMobile ? 'is-mobile' : ''} ${visible ? '' : 'is-hidden'}`}>
+        <p className="hero-kicker">DESARROLLADOR SORIA</p>
+        <p className="hero-main">SOFTWARE A MEDIDA</p>
+        <button type="button" className="hero-cta" onClick={onContact} tabIndex={visible ? 0 : -1}>
+          PEDÍ TU PRESUPUESTO →
+        </button>
+      </div>
+    </Html>
+  )
+}
+
+/**
+ * items: lo que orbita (categorías o proyectos de una categoría). `orbit` es estado mutable
+ * compartido con la barra de navegación (flechas) y vive en App.
+ */
+export default function Experience({ items, orbit, isMobile, hovered, selected, renderCard, onFront, showTitle, onContact, reducedMotion }) {
+  const selectedIndex = items.findIndex((p) => p.id === selected)
   const focus = useMemo(() => focusFor(selectedIndex, isMobile), [selectedIndex, isMobile])
 
-  // Estado orbital compartido (mutable, fuera de React): ángulo base y factor de velocidad.
-  const orbit = useMemo(() => ({ angle: 0, speed: 1, locked: false }), [])
   const cardPositions = useMemo(() => ({}), [])
   const lookAt = hovered && !isMobile ? (cardPositions[hovered] ?? null) : null
 
@@ -42,12 +59,12 @@ export default function Experience({ projects, isMobile, hovered, selected, onHo
     orbit.locked = true
     orbit.speed = 0
     const tween = gsap.to(orbit, {
-      angle: focusBaseAngle(selectedIndex, projects.length, orbit.angle),
+      angle: focusBaseAngle(selectedIndex, items.length, orbit.angle),
       duration: reducedMotion ? 0.01 : 1.6,
       ease: 'power3.inOut',
     })
     return () => tween.kill()
-  }, [selectedIndex, isMobile, orbit, projects.length, reducedMotion])
+  }, [selectedIndex, isMobile, orbit, items.length, reducedMotion])
   // Contenedor DOM estable para las tarjetas <Html>: evita que drei re-monte sus raíces.
   const cardLayer = useRef()
 
@@ -81,15 +98,16 @@ export default function Experience({ projects, isMobile, hovered, selected, onHo
           />
         </Suspense>
         <AmbientParticles count={isMobile ? 400 : 900} />
+        <HeroTitle isMobile={isMobile} visible={showTitle} onContact={onContact} portal={cardLayer} />
         {!isMobile && (
           <ProjectCards3D
-            projects={projects}
+            items={items}
             orbit={orbit}
             positions={cardPositions}
             hovered={hovered}
             focusedId={selected}
-            onHover={onHover}
-            onOpen={onOpen}
+            renderCard={renderCard}
+            onFront={onFront}
             portal={cardLayer}
           />
         )}

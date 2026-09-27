@@ -1,6 +1,19 @@
-import { Atom, Cctv, Database, HeartPulse, MapPin, Radar, ScanLine } from 'lucide-react'
+import { Atom, Bot, Cctv, Code2, Database, Gamepad2, HeartPulse, MapPin, Radar, ScanLine, Waves, Wrench } from 'lucide-react'
 
-const MAP = { cctv: Cctv, scan: ScanLine, radar: Radar, pin: MapPin, database: Database, heart: HeartPulse, atom: Atom }
+const MAP = {
+  cctv: Cctv,
+  scan: ScanLine,
+  radar: Radar,
+  pin: MapPin,
+  database: Database,
+  heart: HeartPulse,
+  atom: Atom,
+  bot: Bot,
+  gamepad: Gamepad2,
+  waves: Waves,
+  wrench: Wrench,
+  code: Code2,
+}
 
 export function ProjectIcon({ name, ...props }) {
   const Icon = MAP[name] ?? Atom

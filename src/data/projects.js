@@ -3,6 +3,28 @@
 
 export const projects = [
   {
+    id: 'pfia',
+    title: 'PFIA',
+    category: 'Experiencia Interactiva · IA',
+    icon: 'bot',
+    color: '#f43f5e',
+    summary:
+      'Penal Federal para Inteligencias Artificiales: visitá reclusos algorítmicos que hablan con IA, recuerdan lo que les hiciste y pueden armar un motín.',
+    highlights: [
+      'Reclusos con IA en cadena (Gemini, Gemma y Groq) que responden en personaje y recuerdan cada visita.',
+      'Motor de película procedural: cámara, sonido y narrativa reaccionan en tiempo real a lo que hacés.',
+      'Motín global: los tomates de todos los visitantes se cuentan en Firestore y disparan eventos compartidos.',
+      'Login con Google y créditos con Mercado Pago, acreditados y validados del lado del servidor.',
+    ],
+    stack: ['Next.js', 'Firebase', 'Gemini', 'Groq', 'Mercado Pago', 'Web Audio'],
+    live: 'https://pfia.vercel.app',
+    repo: null,
+    code: `const reply = await generate(persona, turns);
+film.dispatch({ type: 'TALK', id, ...tone });
+if (tomatoes === RIOT_THRESHOLD)
+  riot.start(prisoner);`,
+  },
+  {
     id: 'vigia',
     title: 'VIGÍA WEB',
     category: 'Videovigilancia P2P · WebRTC',
@@ -163,6 +185,45 @@ link.on('payload', (p) => {
 });`,
   },
 ]
+
+// Categorías que flotan alrededor del avatar. Un proyecto puede estar en más de una
+// sólo si alguien que entra a esa categoría lo buscaría ahí (ej. WiFi MDP: ciudad y utilidad).
+export const categories = [
+  {
+    id: 'diversion',
+    title: 'DIVERSIÓN',
+    tagline: 'Experiencias interactivas, juegos y humor con IA.',
+    icon: 'gamepad',
+    color: '#f43f5e',
+    projects: ['pfia'],
+  },
+  {
+    id: 'mardelplata',
+    title: 'MAR DEL PLATA',
+    tagline: 'Herramientas para vivir y recorrer la ciudad.',
+    icon: 'waves',
+    color: '#38bdf8',
+    projects: ['wifimdp', 'guiamdp'],
+  },
+  {
+    id: 'utilidades',
+    title: 'UTILIDADES',
+    tagline: 'Apps que resuelven problemas del día a día.',
+    icon: 'wrench',
+    color: '#34d399',
+    projects: ['abuelito', 'diario', 'lazo', 'vigia', 'wifimdp'],
+  },
+  {
+    id: 'developers',
+    title: 'DEVELOPERS',
+    tagline: 'APIs, datos e infraestructura para otros desarrolladores.',
+    icon: 'code',
+    color: '#c084fc',
+    projects: ['mdpdata'],
+  },
+]
+
+export const projectsOf = (category) => category.projects.map((id) => projects.find((p) => p.id === id)).filter(Boolean)
 
 export const profile = {
   name: 'Soria Matias',

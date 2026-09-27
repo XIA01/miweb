@@ -2,7 +2,7 @@ import { ProjectIcon } from './icons'
 import CodeTicker from './CodeTicker'
 import { CARD_PX } from '../three/layout'
 
-function Preview({ project, className = '' }) {
+export function Preview({ project, className = '' }) {
   return (
     <div className={`holo-preview relative overflow-hidden rounded-md border border-white/10 ${className}`} style={{ '--c': project.color }}>
       <div className="absolute inset-0 holo-grid" />

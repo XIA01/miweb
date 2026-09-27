@@ -10,10 +10,11 @@ export const NAV = [
   { id: 'contact', label: 'CONTACT' },
 ]
 
-function Profile({ compact }) {
+// El perfil abre Contacto (ahí están WhatsApp, mail, GitHub y LinkedIn) en vez de sacarte del sitio.
+function Profile({ compact, onClick }) {
   const [broken, setBroken] = useState(false)
   return (
-    <a href={profile.github} target="_blank" rel="noreferrer" className="flex items-center gap-3">
+    <button type="button" onClick={onClick} aria-label="Contacto" title="Contacto" className="flex items-center gap-3 text-left">
       <span className="avatar-ring grid h-11 w-11 place-items-center overflow-hidden rounded-full">
         {broken ? (
           <span className="text-sm font-bold text-cyan-200">SM</span>
@@ -27,7 +28,7 @@ function Profile({ compact }) {
           <span className="block text-[11px] tracking-[0.2em] text-slate-400">{profile.role}</span>
         </span>
       )}
-    </a>
+    </button>
   )
 }
 
@@ -73,7 +74,7 @@ export default function Header({ isMobile, active, onNavigate }) {
       </div>
 
       <div className="pointer-events-auto">
-        <Profile compact={isMobile} />
+        <Profile compact={isMobile} onClick={() => go('contact')} />
       </div>
 
       {isMobile && open && (

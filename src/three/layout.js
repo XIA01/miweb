@@ -21,7 +21,7 @@ export const ORBIT = {
   rx: 6.2,
   rz: 3.6,
   tilt: 2.4,
-  speed: 0.14, // rad/s
+  speed: 0.24, // rad/s
 }
 
 // Ángulo donde se "estaciona" la tarjeta seleccionada (adelante a la izquierda: el panel va a la derecha).
@@ -42,6 +42,20 @@ export function orbitPosition(angle, out = new THREE.Vector3()) {
 /** Ángulo base de la órbita que lleva la tarjeta `index` a FOCUS_ANGLE por el camino más corto. */
 export function focusBaseAngle(index, count, current) {
   const target = FOCUS_ANGLE - (index / count) * Math.PI * 2
+  const turns = Math.round((current - target) / (Math.PI * 2))
+  return target + turns * Math.PI * 2
+}
+
+/** Índice de la tarjeta más cercana al frente (θ = 0) para un ángulo base dado. */
+export function frontIndex(count, base) {
+  if (!count) return -1
+  const step = (Math.PI * 2) / count
+  return ((Math.round(-base / step) % count) + count) % count
+}
+
+/** Ángulo base que lleva la tarjeta `index` al frente por el camino más corto. */
+export function frontBaseAngle(index, count, current) {
+  const target = -(index / count) * Math.PI * 2
   const turns = Math.round((current - target) / (Math.PI * 2))
   return target + turns * Math.PI * 2
 }
