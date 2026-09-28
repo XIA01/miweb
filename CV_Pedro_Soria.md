@@ -1,7 +1,7 @@
 # Pedro Matías Soria
 **Desarrollador de software a medida · IA, datos y aplicaciones en tiempo real**
 📍 Mar del Plata, Argentina · 🌐 [soriam.vercel.app](https://soriam.vercel.app) · 💻 [github.com/XIA01](https://github.com/XIA01) · 💼 [linkedin.com/in/desarrolladorsoria](https://linkedin.com/in/desarrolladorsoria)
-✉️ Contacto por WhatsApp o mail desde el botón **Contacto** del portafolio
+✉️ [99xz01@gmail.com](mailto:99xz01@gmail.com) · WhatsApp desde el botón **Contacto** del portafolio
 
 ---
 
