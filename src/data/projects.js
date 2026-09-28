@@ -117,6 +117,28 @@ compass.rotate(brg - heading);
 hud.show(\`\${d.toFixed(0)} m · \${brg}°\`);`,
   },
   {
+    id: 'mdpdisaster',
+    title: 'MDP DISASTER ENGINE',
+    category: 'Simulación Científica · Gemelo Digital',
+    icon: 'waves',
+    color: '#60a5fa',
+    summary:
+      'Simulador de tsunamis para Mar del Plata sobre un gemelo digital de la ciudad: calcula inundación, daño, población expuesta y evacuación, validado con eventos reales.',
+    highlights: [
+      'Gemelo digital con terreno real, batimetría NOAA, edificios y calles de OpenStreetMap y población del Censo INDEC 2022 por edificio.',
+      'Modelo del Atlántico Sur validado con el tsunami real de las Islas Sandwich del Sur (2021) en 8 mareógrafos del IOC.',
+      'Reconstrucción del meteotsunami del 12-01-2026 en La Bristol, calibrada contra el mareógrafo de Mar del Plata.',
+      'Solver de aguas someras en un Web Worker, determinista y reproducible, con 105 tests y validación contra soluciones analíticas.',
+    ],
+    stack: ['TypeScript', 'React', 'MapLibre', 'Web Workers', 'OpenStreetMap', 'Vitest'],
+    live: 'https://mdpdisaster.vercel.app',
+    repo: null,
+    code: `const source = okada(fault);       // fondo marino
+const wave = regional.run(source);   // Atlántico Sur
+const flood = local.run(wave.edge);  // 40 m, mojado/secado
+report(flood, census, evacuation);`,
+  },
+  {
     id: 'guiamdp',
     title: 'GUÍA MDP',
     category: 'Turismo · Geolocalización',
@@ -225,7 +247,7 @@ export const categories = [
     tagline: 'Herramientas para vivir y recorrer la ciudad.',
     icon: 'waves',
     color: '#38bdf8',
-    projects: ['wifimdp', 'guiamdp'],
+    projects: ['mdpdisaster', 'wifimdp', 'guiamdp'],
   },
   {
     id: 'utilidades',
