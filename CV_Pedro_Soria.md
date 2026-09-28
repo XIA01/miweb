@@ -52,6 +52,11 @@ Todos están publicados y funcionando; los links llevan a la versión en vivo.
 - Login con Google y compra de créditos con Mercado Pago, acreditados una sola vez en el servidor aunque el pago llegue por webhook.
 - *Next.js · Firebase · Gemini · Groq · Mercado Pago · Web Audio*
 
+**Hola Vecina** — Experiencia 3D con personajes que conversan con IA · [vecina.vercel.app](https://vecina.vercel.app)
+- Personajes 3D con expresiones faciales, lip-sync en español rioplatense y gestos por cinemática inversa; un "cerebro" con vínculo, emociones y recuerdos que reacciona a la charla, la hora y el clima real de Mar del Plata.
+- Voz neural en el navegador (Piper en un Web Worker), login con Google, créditos con Mercado Pago verificados en el servidor y cuotas diarias de IA para controlar costos.
+- *React Three Fiber · Three.js · Gemini · Groq · Firebase · Mercado Pago · Web Audio*
+
 **Lazo Cuántico** — Pasar enlaces, notas y archivos entre PC y celular sin iniciar sesión · [lazocuantico.netlify.app](https://lazocuantico.netlify.app)
 - Emparejamiento con código temporal o QR; la conexión se destruye al terminar la transferencia.
 

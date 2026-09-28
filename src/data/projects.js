@@ -25,6 +25,28 @@ if (tomatoes === RIOT_THRESHOLD)
   riot.start(prisoner);`,
   },
   {
+    id: 'vecina',
+    title: 'HOLA VECINA',
+    category: 'Experiencia 3D · IA Conversacional',
+    icon: 'house',
+    color: '#fb923c',
+    summary:
+      'Caminás por el pasillo de un PH de Mar del Plata, golpeás el vidrio y tu vecina (o vecino) se asoma a charlar con vos, por texto o por voz.',
+    highlights: [
+      'Personajes 3D con 52 expresiones faciales, lip-sync en español rioplatense y gestos por cinemática inversa (mate, celular, saludar).',
+      'Cerebro estilo Sims: vínculo, cariño, enojo y celos que cambian con la charla, la hora y el clima real de Mar del Plata, y recuerdos persistentes.',
+      'Voz neural gratis en el navegador (Piper en un Web Worker) y respaldo entre proveedores de IA (Gemini y Groq).',
+      'Login con Google, créditos con Mercado Pago (webhook firmado e idempotente) y cuotas diarias de IA controladas en el servidor.',
+    ],
+    stack: ['React Three Fiber', 'Three.js', 'Gemini', 'Groq', 'Firebase', 'Mercado Pago', 'Web Audio'],
+    live: 'https://vecina.vercel.app',
+    repo: null,
+    code: `const turn = await chat(persona, mind, memories);
+npc.face(turn.face);
+npc.gesture(turn.gesture); // IK: mate, celular…
+mind.apply(turn.deltas);   // vínculo, celos, enojo`,
+  },
+  {
     id: 'vigia',
     title: 'VIGÍA WEB',
     category: 'Videovigilancia P2P · WebRTC',
@@ -195,7 +217,7 @@ export const categories = [
     tagline: 'Experiencias interactivas, juegos y humor con IA.',
     icon: 'gamepad',
     color: '#f43f5e',
-    projects: ['pfia'],
+    projects: ['pfia', 'vecina'],
   },
   {
     id: 'mardelplata',

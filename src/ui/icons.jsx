@@ -1,4 +1,4 @@
-import { Atom, Bot, Cctv, Code2, Database, Gamepad2, HeartPulse, MapPin, Radar, ScanLine, Waves, Wrench } from 'lucide-react'
+import { Atom, Bot, Cctv, Code2, Database, Gamepad2, HeartPulse, HouseHeart, MapPin, Radar, ScanLine, Waves, Wrench } from 'lucide-react'
 
 const MAP = {
   cctv: Cctv,
@@ -9,6 +9,7 @@ const MAP = {
   heart: HeartPulse,
   atom: Atom,
   bot: Bot,
+  house: HouseHeart,
   gamepad: Gamepad2,
   waves: Waves,
   wrench: Wrench,
